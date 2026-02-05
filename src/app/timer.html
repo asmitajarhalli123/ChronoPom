@@ -1,0 +1,66 @@
+<h1 class="keep">Keep Going <span class="strong">Strong</span></h1>
+ 
+<div class="container1">
+  <div class="box">
+      <p class="text">DAILY SCORE</p>
+      <p class="text2">{{dailyScore}}</p>
+      <p class="text">points earned today</p>
+  </div>
+
+  <div class="box">
+      <p class="text">TASKS TODAY</p>
+      <p class="text2">{{tasksToday}}/{{totalTasks}}</p>
+      <p class="text">{{tasksToday > 0 ? Math.round((tasksToday/totalTasks)*100) : 0}}% completion</p>
+  </div>
+
+  <div class="box">
+    <p class="text">STREAK</p>
+    <p class="text2">{{streak}}</p>
+    <p class="text">day Streak</p>
+  </div>
+</div>
+
+<div class="container2">
+  <div class="icon">
+    <i class="fa-regular fa-message"></i><p>INSPIRATION</p>
+  </div>
+  <h2>"{{isRunning ? 'Stay focused! You\'re doing great!' : 'Start your first session and begin your journey!'}}"</h2>
+</div>
+
+<div class="container3">
+  <p class="next">WHAT'S NEXT</p>
+  <h3 class="task">{{totalTasks - tasksToday}} task left to complete</h3>
+</div>
+
+<div class="container4">
+  <div class="focus">
+    <div class="mintext">
+      <span class="min">Minutes Matter.<br></span> <span class="count">Make Them Count.</span>
+    </div>
+    <div class="text">
+      <p>Success isn't built in hours of motivation — it's built in focused minutes. Start now, stay consistent, and let progress stack up</p>
+    </div>
+  </div>
+
+  <div class="timer">
+    <div class="focus2">
+      <p>FOCUS</p>
+    </div>
+    <div class="timer-box">
+      <h1>{{getProgress()}}%</h1>
+      <p>{{formatTime()}}</p>
+      <p>{{isRunning ? 'RUNNING' : 'PAUSED'}}</p>
+      <div class="timer-controls">
+        <button ng-click="startTimer()" ng-disabled="isRunning">
+          <i class="fa-solid fa-play"></i> Start
+        </button>
+        <button ng-click="pauseTimer()" ng-disabled="!isRunning">
+          <i class="fa-solid fa-pause"></i> Pause
+        </button>
+        <button ng-click="resetTimer()">
+          <i class="fa-solid fa-rotate-right"></i> Reset
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
