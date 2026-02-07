@@ -1,9 +1,22 @@
 .body{
     margin: 0;
     padding: 0;
-   
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
+
+.navigation {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+ng-view {
+  display: block;
+  padding-top: 140px;
+}
 .animated-text {
   font-size: 40px;
   font-weight: bold;
@@ -192,24 +205,25 @@
 }
 
 .container4{
-    height: 100vh;
+    height: 200vh;
     width: 100%;
-   
     align-items: center;
     justify-content:space-around;
     display: flex;
-    margin-top: 20%;
-   
+    margin-top: 10%;
+  
+    gap: 5%;
 }
 
 .focus{
-    height: 80%;
-    width: 55%;
-  
+    height: 60%;
+    width: 60%;
+    
     align-items: center;
     justify-content: center;
     display: flex;
     flex-direction: column;
+   margin-left: 10%;
    
 
 }
@@ -220,14 +234,14 @@ body {
 
 
 .timer{
-     height: 75%;
-    width: 40%;
+     height: 50%;
+    width: 55%;
     background-color:#547792;
     align-items: center;
     justify-content:space-around;
     display: flex;
     flex-direction: column;
-    
+    margin-right: 10%;
     
 }
 
@@ -239,14 +253,14 @@ body {
     align-items: center;
     display: flex;
     justify-content: center;
-    margin-bottom: 15%;
+    margin-bottom: 39%;
    
 }
 .min{
 color: rgb(88, 86, 86);
 font-size: 500%;
 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-margin-bottom: 20%;
+margin-bottom: 25%;
 
 
 }
@@ -273,18 +287,30 @@ opacity: 35%;}
 }
 
 .mintext p{
-margin-top: 20%;
+margin-top: 15%;
 font-size: 120%;
 }
 
-.text p{
-  
+.mintext{
+    margin-bottom: 21%;
    
+    height: fit-content;
+}
+
+.mintext .container5{
+    margin-top: 10%;
 }
 
 
+.right a.active{
+    color: #97FEED;
+    font-weight: 500;
+    border-bottom: 3px solid #97FEED;
+    padding-bottom: 5px;
+}
 
-
-
-
-
+.conatiner{
+    width: 100%;
+    
+    overflow-x: auto;
+}
