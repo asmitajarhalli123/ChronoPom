@@ -145,6 +145,43 @@ height:70px;
   opacity: 70%;
 }
 
+.container6{
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+ margin:50px auto;
+}
+
+.card{
+  width: 30%;
+  background-color: #fdf9f6;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+ 
+}
+
+.card h3{
+  margin-bottom: 10px;
+  color: #3b3b3b;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card p{
+  color: #777;
+  font-size: 14px;
+}
+
+.card:hover{
+  background-color: #f3ede8;
+}
+
+
+
+
+
+
 .pro
 {
   color: rgb(57, 55, 55);
