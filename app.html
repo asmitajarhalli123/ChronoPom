@@ -12,13 +12,14 @@
   <script src="app.js"></script>
 </head>
 <body ng-controller="MainController">
+
   <div class="navigation">
-    <div class="image left">
+    <div class="image left">Pp
     </div>
 
     <div class="right">
       <i class="fa-solid fa-clock"></i>
-      <a href="#!/timer" ng-class="{'active': currentRoute == '/timer'}">TIMER</a>
+      <a href="#!/timer" ng-class="{'active': currentRoute == '/timer'}" ng-controller="myctrl">TIMER</a>
       <i class="fa-solid fa-list-check"></i>
       <a href="#!/tasks" ng-class="{'active': currentRoute == '/tasks'}">TASKS</a>
       <i class="fa-solid fa-chart-line"></i>
@@ -30,6 +31,7 @@
   </div>
 
 
+  
   <div ng-view></div>
 
 </body>
