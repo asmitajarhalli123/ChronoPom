@@ -14,7 +14,8 @@
 <body ng-controller="MainController">
 
   <div class="navigation">
-    <div class="image left">Pp
+
+    <div class="image left">
     </div>
 
     <div class="right">
@@ -26,9 +27,93 @@
       <a href="#!/analytics" ng-class="{'active': currentRoute == '/analytics'}">ANALYTICS</a>
       <i class="fa-solid fa-bars-progress"></i>
       <a href="#!/progress" ng-class="{'active': currentRoute == '/progress'}">PROGRESS</a>
-      <div class="color"><i class="fa-solid fa-palette"></i></div>
+
+     
+      <div class="colorbox">
+      <div class="color" ng-click="changeColor()"><i class="fa-solid fa-palette"></i></div>
+        <div class="cont" ng-show="color">
+    <h2 class="title">Select Your Theme</h2>
+
+    <!-- Neon Focus -->
+    <div class="theme-card" ng-click="unshow()" ng-class="{ 'active': currentTheme == 'Neon Focus'}">
+      <div class="theme-info">
+        <h3>Neon Focus</h3>
+        <p>Dark background with glowing accents, futuristic aesthetic</p>
+        <div class="colors">
+          <span style="background:#0b1020"></span>
+          <span style="background:#e6f0ff"></span>
+          <span style="background:#00d4ff"></span>
+          <span style="background:#060b1a"></span>
+          <span style="background:#ff007a"></span>
+        </div>
+      </div>
     </div>
+
+    <!-- Soft Pastel Calm (Active) -->
+    <div class="theme-card active" ng-click="unshow()"  ng-class="{'active': currentTheme == 'Soft Pastel Calm'}">
+      <div class="theme-info"> 
+        <div class="header-row">
+          <h3>Soft Pastel Calm</h3>
+          
+        </div>
+        <p>Light colors with rounded elements, stress-free design</p>
+        <div class="colors">
+          <span style="background:#f8f5f0"></span>
+          <span style="background:#5a5148"></span>
+          <span style="background:#b8b2e6"></span>
+          <span style="background:#ffffff"></span>
+          <span style="background:#a8dadc"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Glassmorphism -->
+    <div class="theme-card" ng-class="{'active': currentTheme == 'Glassmorphism'}" ng-click="unshow()">
+      <div class="theme-info">
+        <h3>Glassmorphism</h3>
+        <p>Blurred transparent cards with soft light effects</p>
+        <div class="colors">
+          <span style="background:#0f172a"></span>
+          <span style="background:#e5e7eb"></span>
+          <span style="background:#4f6df5"></span>
+          <span style="background:#f1f5f9"></span>
+          <span style="background:#7c5cff"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Retro Pixel -->
+    <div class="theme-card" ng-class="{'active': currentTheme == 'Retro Pixel'}" ng-click="unshow()">
+      <div class="theme-info">
+        <h3>Retro Pixel</h3>
+        <p>Pixel fonts, gamified UI, nostalgic 8-bit aesthetic</p>
+        <div class="colors">
+          <span style="background:#3a0ca3"></span>
+          <span style="background:#f7ff00"></span>
+          <span style="background:#ff00ff"></span>
+          <span style="background:#1b1b3a"></span>
+          <span style="background:#00f5d4"></span>
+        </div>
+      </div>
+    </div>
+
   </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+      <!-- right -->
+      </div>
+      
+      <!-- navigation -->
+      </div>                    
 
 
   

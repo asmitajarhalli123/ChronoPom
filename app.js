@@ -31,6 +31,16 @@ app.controller('MainController', ['$scope', '$location', function($scope, $locat
   $scope.$on('$routeChangeSuccess', function() {
     $scope.currentRoute = $location.path();
   });
+
+$scope.color = false;
+  $scope.changeColor = function(){
+    $scope.color = !$scope.color;
+  }
+
+  $scope.unshow = function(){
+    $scope.color =false;
+  }
+
 }]);
 
 

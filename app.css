@@ -487,7 +487,7 @@ height:70px;
 
 .logo h1{
   font-size: 1000%;
-  opacity: 20%;
+  opacity: 28%;
 }
 .msg{
   align-items: center;
@@ -530,7 +530,101 @@ height:70px;
   max-width: 500px;
 }
 
+.color{
+  width: 125px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+/* colordiv */
 
 
+.cont {
+  max-width: 720px;
+  
+}
 
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
 
+/* Theme Card */
+.theme-card {
+  background: #fff;
+  border: 2px solid #e6d9c9;
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+  transition: all 0.25s ease;
+}
+
+.theme-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+  color: #ff7a7a;
+  
+}
+
+.theme-card h3 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.theme-card p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+/* Active Card */
+.theme-card.active {
+  border-color: #ffb3b3;
+  box-shadow: 0 0 0 2px #ffe5e5 inset;
+}
+
+/* Header row for active badge */
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.active-badge {
+  color: #ff7a7a;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Color Switches */
+.colors {
+  display: flex;
+  gap: 10px;
+}
+
+.colors span {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.cont{
+  height: auto;
+  width: auto;
+  margin-top: 220%;
+  
+}
+
+.colorbox{
+ 
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  height: 280vh;
+  width: 30%;
+}
