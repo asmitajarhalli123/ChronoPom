@@ -6,19 +6,19 @@ app.config(['$routeProvider', function($routeProvider) {
   $routeProvider
     .when("/timer", {
       templateUrl: 'timer.html',
-      controller: 'TimerController'
+      
     })
     .when("/tasks", {
       templateUrl: 'tasks.html',
-      controller: 'TasksController'
+      
     })
     .when("/analytics", {
       templateUrl: 'analytics.html',
-      controller: 'AnalyticsController'
+      
     })
     .when("/progress", {
       templateUrl: 'progress.html',
-      controller: 'ProgressController'
+      
     })
     .otherwise({
       redirectTo: '/timer'
