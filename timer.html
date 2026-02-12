@@ -53,8 +53,8 @@
 </div>
 <div class="buttons">
   <button class="start" ng-click="start()"> <i class="fa-solid fa-play"></i>  START FOCUS</button>
-  <button class="reload"><i class="fa-solid fa-rotate"></i>
-  <button class="next"><i class="fa-solid fa-arrow-right"></i>
+  <button class="reload" ng-click="restart()"><i class="fa-solid fa-rotate"></i>
+  <button class="next" ng-click="next()"><i class="fa-solid fa-arrow-right"></i>
 </button>
 </button>
 </div>
@@ -82,17 +82,19 @@
 <div class="container6">
   
   <div class="card">
-    <h3>Tasks</h3>
+    <h3><a href="#!/tasks" ng-class="{'active': currentRoute == '/tasks'}">Tasks</a></h3>
     <p>Manage your current tasks and sessions</p>
   </div>
 
   <div class="card">
-    <h3>Analytics</h3>
+    <h3><a href="#!/analytics" ng-class="{'active': currentRoute == '/analytics'}">Analytics </a>
+</h3>
     <p>View task history and progress charts</p>
   </div>
 
   <div class="card">
-    <h3>Progress</h3>
+    <h3><a href="#!/progress" ng-class="{'active': currentRoute == '/progress'}">Progress</a>
+</h3>
     <p>Check achievements and streaks</p>
   </div>
 

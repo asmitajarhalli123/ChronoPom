@@ -62,6 +62,7 @@ ng-view {
     justify-content: space-between;
     display: flex;
     padding-right: 10%
+   
 }
 
 .right a{
@@ -75,9 +76,9 @@ ng-view {
 }
 
 .right i{
-    color: rgb(136, 136, 136);
+    color:#A6FF96;
     padding-left: 120px;
-    
+    padding-right: 6px;
 }
 
 .right a:hover{
@@ -132,16 +133,18 @@ ng-view {
     flex-direction: column;
     box-shadow: 0 4px 4px #97FEED;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 3px 3px 10px rgb(200, 198, 198);
 }
 
 .box:hover{
      box-shadow: 4px 4px 4px 4px #97FEED;
-     background-color: #2c4d4c;
-     color: white;
+     background-color: #AED2FF;
+     color: black;
      transform: 15s;
      border-radius: 8%;
-     opacity: 60%;
-
+     opacity: 90%;
+     box-shadow: 5px 5px 10px gray;
+     transform: scale(1.09);
 }
 .text:hover{
     color: white;
@@ -530,6 +533,9 @@ height:70px;
   max-width: 500px;
 }
 
+a{
+  text-decoration: none;
+}
 .color{
   width: 125px;
   align-items: center;
@@ -901,3 +907,4 @@ body{
   color: #7a7a7a;
   max-width: 500px;
 }
+

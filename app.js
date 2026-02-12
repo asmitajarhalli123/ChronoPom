@@ -49,6 +49,7 @@ app.controller('myctrl' , function($scope , $interval){
     
       var counterInterval = null;
 
+      //start the timer
       $scope.start = function() {
         console.log("Start button clicked");
         if (!counterInterval) {  // prevent multiple intervals
@@ -57,6 +58,28 @@ app.controller('myctrl' , function($scope , $interval){
           }, 1000); // 1000ms = 1 second
         }
       };
+
+      ///restart the timer
+      $scope.restart =function(){
+            $scope.count = 0;
+            if (counterInterval) {
+              $interval.cancel(counterInterval);
+              counterInterval = null;
+            }
+            $scope.start();
+      }
+
+
+      //go to next for break
+      $scope.next =function(){
+            $scope.count = 0;
+            if (counterInterval) {
+              $interval.cancel(counterInterval);
+              counterInterval = null;
+            }
+           
+      }
+      
 });
 
 
