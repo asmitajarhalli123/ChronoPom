@@ -46,10 +46,11 @@ $scope.color = false;
 
 app.controller('myctrl' , function($scope , $interval){
     $scope.count = 0;
-    $scope.msg= "hello";
+    
       var counterInterval = null;
 
       $scope.start = function() {
+        console.log("Start button clicked");
         if (!counterInterval) {  // prevent multiple intervals
           counterInterval = $interval(function() {
             $scope.count++;

@@ -536,7 +536,11 @@ height:70px;
   justify-content: center;
   display: flex;
   flex-direction: column;
+  background-color: transparent;
 }
+
+.color i{ color: #7091F5; font-size: larger; font-size: larger;}
+.color:hover i{ color: #97FFF4; transform: rotate(150deg)};
 
 /* colordiv */
 
@@ -560,6 +564,8 @@ height:70px;
   padding: 18px 20px;
   margin-bottom: 18px;
   transition: all 0.25s ease;
+ 
+ 
 }
 
 .theme-card:hover {
@@ -625,8 +631,22 @@ height:70px;
   justify-content: center;
   display: flex;
   flex-direction: column;
-  height: 280vh;
-  width: 30%;
+  height: 150vh;
+  width: 100vw;
+  
+}
+
+.title{
+font-size: 24px;
+margin-bottom: 20px; 
+font-weight: 400; 
+margin-left: 5%;
+background:linear-gradient(#350B40 , #AD6C80 , #EE99A0);
+
+background-color: transparent;
+background-clip: text; 
+-webkit-background-clip: text;
+color: transparent;
 }
 
 body {
