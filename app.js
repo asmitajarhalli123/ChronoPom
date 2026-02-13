@@ -51,7 +51,7 @@ app.controller('myctrl' , function($scope , $interval){
 
       //start the timer
       $scope.start = function() {
-        console.log("Start button clicked");
+       
         if (!counterInterval) {  // prevent multiple intervals
           counterInterval = $interval(function() {
             $scope.count++;
