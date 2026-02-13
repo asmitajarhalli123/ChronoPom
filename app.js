@@ -1,5 +1,5 @@
 // Initialize the app with ngRoute dependency
-var app = angular.module('myapp', ['ngRoute']);
+var app = angular.module('myapp',['ngRoute']);
 
 // Configure routes
 app.config(['$routeProvider', function($routeProvider) {
@@ -79,6 +79,9 @@ app.controller('myctrl' , function($scope , $interval){
             }
            
       }
+
+      
+     
       
 });
 
