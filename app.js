@@ -1,24 +1,24 @@
 // Initialize the app with ngRoute dependency
-var app = angular.module('myapp', ['ngRoute']);
+var app = angular.module('myapp',['ngRoute']);
 
 // Configure routes
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider
     .when("/timer", {
       templateUrl: 'timer.html',
-      controller: 'TimerController'
+      
     })
     .when("/tasks", {
       templateUrl: 'tasks.html',
-      controller: 'TasksController'
+      
     })
     .when("/analytics", {
       templateUrl: 'analytics.html',
-      controller: 'AnalyticsController'
+      
     })
     .when("/progress", {
       templateUrl: 'progress.html',
-      controller: 'ProgressController'
+      
     })
     .otherwise({
       redirectTo: '/timer'
@@ -46,16 +46,43 @@ $scope.color = false;
 
 app.controller('myctrl' , function($scope , $interval){
     $scope.count = 0;
-    $scope.msg= "hello";
+    
       var counterInterval = null;
 
+      //start the timer
       $scope.start = function() {
+       
         if (!counterInterval) {  // prevent multiple intervals
           counterInterval = $interval(function() {
             $scope.count++;
           }, 1000); // 1000ms = 1 second
         }
       };
+
+      ///restart the timer
+      $scope.restart =function(){
+            $scope.count = 0;
+            if (counterInterval) {
+              $interval.cancel(counterInterval);
+              counterInterval = null;
+            }
+            $scope.start();
+      }
+
+
+      //go to next for break
+      $scope.next =function(){
+            $scope.count = 0;
+            if (counterInterval) {
+              $interval.cancel(counterInterval);
+              counterInterval = null;
+            }
+           
+      }
+
+      
+     
+      
 });
 
 

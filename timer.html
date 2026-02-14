@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <div class="container">
+<div class="container" ng-controller="myctrl">
 <h1 class="keep">Keep Going<span class="strong">Strong</span></h1>
  
 <div class="container1">
@@ -56,13 +48,13 @@
 
 </div>
 <div class="timecount">
-  <h1>00:00</h1>
+  <h1>{{count | number:2}}</h1>
   
 </div>
 <div class="buttons">
-  <button class="start"> <i class="fa-solid fa-play"></i>  START FOCUS</button>
-  <button class="reload"><i class="fa-solid fa-rotate"></i>
-  <button class="next"><i class="fa-solid fa-arrow-right"></i>
+  <button class="start" ng-click="start()"> <i class="fa-solid fa-play"></i>  START FOCUS</button>
+  <button class="reload" ng-click="restart()"><i class="fa-solid fa-rotate"></i>
+  <button class="next" ng-click="next()"><i class="fa-solid fa-arrow-right"></i>
 </button>
 </button>
 </div>
@@ -90,17 +82,19 @@
 <div class="container6">
   
   <div class="card">
-    <h3>Tasks</h3>
+    <h3><a href="#!/tasks" ng-class="{'active': currentRoute == '/tasks'}">Tasks</a></h3>
     <p>Manage your current tasks and sessions</p>
   </div>
 
   <div class="card">
-    <h3>Analytics</h3>
+    <h3><a href="#!/analytics" ng-class="{'active': currentRoute == '/analytics'}">Analytics </a>
+</h3>
     <p>View task history and progress charts</p>
   </div>
 
   <div class="card">
-    <h3>Progress</h3>
+    <h3><a href="#!/progress" ng-class="{'active': currentRoute == '/progress'}">Progress</a>
+</h3>
     <p>Check achievements and streaks</p>
   </div>
 
@@ -120,7 +114,3 @@
   </div>
 
 
-<div ng-view></div>
-
-</body>
-</html>
