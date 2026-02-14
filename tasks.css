@@ -43,13 +43,13 @@ body{
   color: #b5b4b4;
   opacity:0.5;
   margin-top: 20%;
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  width: 100%;
+  
 }
 .garden{
-  /* position:absolute;
-  top: 50%;
-  left: 20%;
-  font-style: italic;
-  color: #d8d3cd; */
 position: absolute;
   top: 50%;
   left: 50%;
@@ -58,4 +58,8 @@ position: absolute;
   font-size: 20px;
   color: #d8d3cd;
   opacity: 0.5;
+}
+.input{
+  border: none;
+  font-size:40px;
 }
