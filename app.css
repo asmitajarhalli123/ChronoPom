@@ -882,6 +882,7 @@ height:70px;
 }
 
 
+/* tasks.html */
 body{
   margin: 0;
   font-family: 'Segoe UI', Tahoma, sans-serif;
@@ -897,6 +898,7 @@ body{
 
 .current{
   width: 60%;
+
 }
 .currenttext{
   line-height: 1.2;
@@ -1198,4 +1200,67 @@ select:focus {
   align-items: center;
   justify-content:space-evenly;
   display: flex;
+}
+
+
+
+/* tasks.html */
+.settask{
+  width: 100%;
+  height: 40vh;
+  align-items: center;
+  justify-content:space-between;
+  display: flex;
+  
+
+}
+
+.settask .input{
+  width: 30%;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  padding: 0 20px;
+  font-size: 22px;
+  background-color:#071952;
+  margin-left: 7%;
+  color: rgb(220, 220, 220);
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.settask .input::placeholder{
+  color: #a3a2a2;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.settask .select{
+  width: 20%;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  padding: 0 20px;
+ 
+  font-size: 22px;
+  background-color:#72778d;
+  color: rgb(220, 220, 220);
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  margin-right: 10%;
+ 
+}
+
+.settask .select option{
+  background-color: #525560;
+  color: rgb(220, 220, 220);
+}
+
+.settask .select option:hover{
+  background-color: #2f3240;
+  color: rgb(220, 220, 220);
+  opacity: 80%;
+}
+
+.settask i{
+  color: #a3a2a2;
+  font-size: larger;
+  margin-right: 23%;
 }
