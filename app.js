@@ -80,10 +80,4 @@ app.controller('myctrl' , function($scope , $interval){
            
       }
 
-      
-     
-      
-});
-
-
-
+    });
