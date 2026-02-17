@@ -12,52 +12,65 @@
 <div class="container7">
   <div class="current">
     <div class="currenttext">
-<span class="current">Current<br></span> <span class="task">Tasks</span>
-<p>Manage and organize all your focus tasks. Assign them to timer sessions and track your progress.</p>
+<span class="current">Current<span class="task">Tasks</span></span> 
+<p>Organize your goals into actionable tasks. Track time, maintain focus, and achieve more.</p>
     </div>
   </div>
 </div>
 
-<div class="settask">
-  
-
-  <label class="txt">What's your task?</label>
-  <input type="text" placeholder="What we are building today?" class="input">
 
 
-   <div class="select">
-    <div class="prior">
-    <label for="priority">Priority</label>
-    <select id="priority" name="priority">
-        <option value="high">High</option>
-        <option value="medium">Medium</option>
-        <option value="low">Low</option>
-    </select>
+<!-- form -->
+
+<div class="setTask">
+    <div class="tp-form-card">
+
+        <!-- Task Title -->
+        <label class="tp-main-label">What's your task?</label>
+        <input type="text" 
+               class="tp-text-input" 
+               placeholder="e.g., Design landing page, Write API documentation...">
+
+        <!-- Pomodoro & Priority -->
+        <div class="tp-flex-row">
+
+            <div class="tp-flex-col">
+                <label class="tp-sub-label">Estimated Pomodoros</label>
+                <select class="tp-select-input">
+                    <option>1 Pomodoro (25 min)</option>
+                    <option>2 Pomodoros (50 min)</option>
+                    <option>3 Pomodoros (75 min)</option>
+                </select>
+            </div>
+
+            <div class="tp-flex-col">
+                <label class="tp-sub-label">Priority</label>
+                <select class="tp-select-input">
+                    <option>🔥 High</option>
+                    <option>⚡ Medium</option>
+                    <option>🌿 Low</option>
+                </select>
+            </div>
+
+        </div>
+
+        <!-- Description -->
+        <label class="tp-main-label" style="margin-top: 20px;">
+            Task description (optional)
+        </label>
+
+        <textarea class="tp-textarea-input"
+                  placeholder="Add any notes or details about this task...">
+        </textarea>
+
+        <!-- Button -->
+        <button class="tp-submit-btn">+ Add Task</button>
+
     </div>
-
-    <div class="pomodo">
-    <label for="">Pomodoros</label>
-    <select  name="pomodoros">
-        <option value="high">1 Pomodoro (25min)</option>
-        <option value="medium">2 Pomodoros (50min)</option>
-        <option value="low">3 Pomodoros (75min)</option>
-        <option value="low">4 Pomodoros (100min)</option>
-        <option value="low">5 Pomodoros (125min)</option>
-    </select>
 </div>
 
-   </div>
-
-   <label for="">Task Description (optional)</label>
-    <textarea name="description" placeholder="Add more details about your task..."></textarea>
-
-    <button class="addtask><i class="fa-solid fa-plus"></i> Add Task</button>
-    
-
-
-
 </div>
-</div>
+
   </body>
   </html>
 
