@@ -19,20 +19,40 @@
 </div>
 
 <div class="settask">
+  
+
+  <label class="txt">What's your task?</label>
   <input type="text" placeholder="What we are building today?" class="input">
- 
+
 
    <div class="select">
-    <label for="priority">Priority:</label>
+    <div class="prior">
+    <label for="priority">Priority</label>
     <select id="priority" name="priority">
-        <option value="">-- Select Priority --</option>
         <option value="high">High</option>
         <option value="medium">Medium</option>
         <option value="low">Low</option>
     </select>
+    </div>
+
+    <div class="pomodo">
+    <label for="">Pomodoros</label>
+    <select  name="pomodoros">
+        <option value="high">1 Pomodoro (25min)</option>
+        <option value="medium">2 Pomodoros (50min)</option>
+        <option value="low">3 Pomodoros (75min)</option>
+        <option value="low">4 Pomodoros (100min)</option>
+        <option value="low">5 Pomodoros (125min)</option>
+    </select>
+</div>
+
    </div>
 
-    <i class="fa-solid fa-plus"></i>
+   <label for="">Task Description (optional)</label>
+    <textarea name="description" placeholder="Add more details about your task..."></textarea>
+
+    <button class="addtask><i class="fa-solid fa-plus"></i> Add Task</button>
+    
 
 
 
