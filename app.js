@@ -46,7 +46,10 @@ $scope.color = false;
 
 app.controller('myctrl' , function($scope , $interval){
     $scope.count = 0;
-    
+    $scope.taskname = " ";
+    $scope.taskdesc = " ";
+    $scope.taskpriority = " ";
+
       var counterInterval = null;
 
       //start the timer
@@ -76,8 +79,14 @@ app.controller('myctrl' , function($scope , $interval){
             if (counterInterval) {
               $interval.cancel(counterInterval);
               counterInterval = null;
-            }
-           
+            }  
+      }
+$scope.istask=false;
+      $scope.submittask = function(){
+        $scope.istask=true;
       }
 
     });
+
+
+

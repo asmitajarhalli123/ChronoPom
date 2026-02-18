@@ -28,6 +28,7 @@
         <!-- Task Title -->
         <label class="tp-main-label">What's your task?</label>
         <input type="text" 
+               ng-model="taskname"
                class="tp-text-input" 
                placeholder="e.g., Design landing page, Write API documentation...">
 
@@ -45,10 +46,10 @@
 
             <div class="tp-flex-col">
                 <label class="tp-sub-label">Priority</label>
-                <select class="tp-select-input">
-                    <option>🔥 High</option>
-                    <option>⚡ Medium</option>
-                    <option>🌿 Low</option>
+                <select class="tp-select-input" ng-model="taskpriority">
+                    <option> High</option>
+                    <option> Medium</option>
+                    <option> Low</option>
                 </select>
             </div>
 
@@ -59,17 +60,24 @@
             Task description (optional)
         </label>
 
-        <textarea class="tp-textarea-input"
+        <textarea class="tp-textarea-input" ng-model="taskdesc"
                   placeholder="Add any notes or details about this task...">
         </textarea>
 
         <!-- Button -->
-        <button class="tp-submit-btn">+ Add Task</button>
+        <button class="tp-submit-btn" ng-click="submittask">+ Add Task</button>
 
     </div>
 </div>
-
 </div>
+
+<div class="alltask" ng-show="istask">
+<h2>{{taskname}}</h2>
+<p>{{taskdesc}}</p>
+<p>{{taskpriority}}</p>
+</div>
+
+
 
   </body>
   </html>
