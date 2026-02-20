@@ -44,11 +44,9 @@ $scope.color = false;
 }]);
 
 
-app.controller('myctrl' , function($scope , $interval){
+app.controller('myctrl' , function($scope , $interval , $timeout){
     $scope.count = 0;
-    $scope.taskname = " ";
-    $scope.taskdesc = " ";
-    $scope.taskpriority = " ";
+ 
 
       var counterInterval = null;
 
@@ -81,12 +79,22 @@ app.controller('myctrl' , function($scope , $interval){
               counterInterval = null;
             }  
       }
-$scope.istask=false;
-      $scope.submittask = function(){
-        $scope.istask=true;
-      }
 
-    });
+        $scope.tasklist = [];
+        $scope.newTask = {};
+        $scope.submittask = function(){
+          if ($scope.newTask.taskname && $scope.newTask.taskname.trim() !== "") {
+                      $scope.tasklist.push({
+                          tname: $scope.newTask.taskname,
+                         
+                      });
 
+                  }
+                  // Clear form after adding
+                      $scope.newTask = {};
+              };
+  });
+
+   
 
 
