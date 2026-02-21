@@ -14,14 +14,17 @@
 </div> -->
 
   <div class="app">
-
+ <!-- heading  -->
+    <div class="head">
     <h1 class="ttl">Task Manager</h1>
-    <p class="sub">Stay organized and conquer your goals</p>
+    <p class="sub">Turn Plans into Progress.</p>
+    </div>
+
 
     <!-- Stats -->
     <div class="stats">
       <div class="card">
-        <h2 class="num">1</h2>
+        <h2 class="num">{{taskCount}}</h2>
         <p>Total Tasks</p>
       </div>
 
@@ -46,21 +49,24 @@
     <!-- Task Item -->
     <div class="task">
      
-      <div ng-repeat="t in tasklist">
-        <h3 class="tname" >{{t.tname}}</h3>
-        <p class="time">Feb 20, 11:34 PM</p>
-      </div>
+     <div ng-repeat="t in tasklist" class="tasklist">
+
+    <div class="taskname">
+        <h3 class="tname">{{t.tname}}</h3>
+        <button class="btn" ng-click="startProgress(t)">
+            Focus Initiate
+        </button>
     </div>
 
-    <!-- Progress -->
-    <div class="prog">
-      <p>Progress</p>
-      <div class="bar">
-        <div class="fill"></div>
-      </div>
-      <h3 class="pct">0% Complete</h3>
+    <div class="progress-container">
+        <div class="progress-bar"
+             ng-style="{'width': t.progress + '%'}">
+            {{t.progress}}%
+        </div>
     </div>
-  </div>
+
+</div>
+      </div>
 
 
 

@@ -46,7 +46,7 @@ $scope.color = false;
 
 app.controller('myctrl' , function($scope , $interval , $timeout){
     $scope.count = 0;
- 
+    $scope.taskCount = 0;
 
       var counterInterval = null;
 
@@ -79,11 +79,14 @@ app.controller('myctrl' , function($scope , $interval , $timeout){
               counterInterval = null;
             }  
       }
-
+        $scope.progress = 0;
         $scope.tasklist = [];
         $scope.newTask = {};
         $scope.istask = false;
+
+        // function to set task
         $scope.submittask = function(){
+          $scope.taskCount = $scope.taskCount+1;
           if ($scope.newTask.taskname && $scope.newTask.taskname.trim() !== "") {
                       $scope.tasklist.push({
                           tname: $scope.newTask.taskname,
@@ -91,10 +94,37 @@ app.controller('myctrl' , function($scope , $interval , $timeout){
                       });
 
                   }
-                   $scope.istask = true;
+                  
                   // Clear form after adding
                       $scope.newTask = {};
               };
+
+
+//function for task progress bar working 
+$scope.startProgress = function(task){
+
+    if (!task.progress) {
+        task.progress = 0; 
+    }
+
+    if(task.interval){
+        $interval.cancel(task.interval);
+    }
+
+    task.interval = $interval(function () {
+
+        if (task.progress < 100) {
+            task.progress++;
+        } else {
+            $interval.cancel(task.interval);
+        }
+
+    }, 1000);
+
+};
+
+
+              
   });
 
    

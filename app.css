@@ -4,6 +4,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     color: black;
+    
 }
 
 
@@ -49,7 +50,7 @@ ng-view {
 
 .left{
     height: 120px;
-    width: 150px;
+    width: 140px;
     background-image: url('logo2.png');
     background-size: cover;
     
@@ -321,13 +322,7 @@ font-size: 120%;
 /* 
 timer */
 
-body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  
-}
+
 
 .btn1{
   background-color: white;
@@ -666,13 +661,7 @@ background-clip: text;
 color: transparent;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  
-}
+
 
 .btn1{
   background-color: white;
@@ -884,12 +873,7 @@ height:70px;
 
 
 /* tasks.html */
-body{
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-  background-color: #fbf8f3;
-  color: #4a4a4a;
-}
+
 .container7{
   width: 100%;
   height: 100vh;
@@ -1207,17 +1191,6 @@ select:focus {
 /* 
 .analytics */
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
- 
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
 .dashboard {
   display: flex;
   gap: 30px;
@@ -1412,17 +1385,24 @@ body {
 .app {
   width: 800px;
   max-width: 95%;
-  margin-top: 20%;
+  margin-top: 15%;
 }
 
 .ttl {
   font-size: 48px;
   font-weight: 700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color:#111a3c;
 }
 
 .sub {
   color: #aab3d1;
   margin-bottom: 40px;
+   font-size: 25px;
+  font-weight: 400;
+  opacity: 50%;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-right: 20%;
 }
 
 /* Stats */
@@ -1500,13 +1480,22 @@ body {
   justify-content: space-evenly;
   gap: 20px;
   height: fit-content;
-  background: #111a3c;
   padding: 20px;
-  border-radius: 14px;
   margin-bottom: 30px;
   padding-right: 70%;
 }
 
+.tasklist{
+  flex: 1;
+  padding: 16px;
+  border-radius: 14px;
+  border: none;
+  background: #111a3c;
+  color: #fff;
+  font-size: 16px;
+  width: 50vw;
+  margin-left: 225%;
+}
 .dot {
   width: 22px;
   height: 22px;
@@ -1517,6 +1506,8 @@ body {
 .tname {
   font-size: 18px;
   margin-bottom: 5px;
+  opacity: 90%;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .time {
@@ -1550,3 +1541,29 @@ body {
   color: #22d3ee;
 }
 
+body{
+  overflow-y: auto;
+}
+
+.taskcontainer{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.head{
+  
+  margin-bottom: 25%;
+}
+
+.taskname{
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+}
+
+.taskname .btn{
+  height: 80%;
+   background: linear-gradient(90deg, #004d87, #8d7294);
+}
