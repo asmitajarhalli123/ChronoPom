@@ -1409,8 +1409,6 @@ body {
 
 /* tasklist */
 
-
-
 .app {
   width: 800px;
   max-width: 95%;
@@ -1418,7 +1416,6 @@ body {
 }
 
 .ttl {
-  color: #00d4ff;
   font-size: 48px;
   font-weight: 700;
 }
@@ -1498,14 +1495,16 @@ body {
 /* Task */
 .task {
   display: flex;
-  
+  flex-direction: column;
   align-items: center;
-
+  justify-content: space-evenly;
   gap: 20px;
+  height: fit-content;
   background: #111a3c;
   padding: 20px;
   border-radius: 14px;
   margin-bottom: 30px;
+  padding-right: 70%;
 }
 
 .dot {

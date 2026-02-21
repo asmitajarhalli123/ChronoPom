@@ -82,6 +82,7 @@ app.controller('myctrl' , function($scope , $interval , $timeout){
 
         $scope.tasklist = [];
         $scope.newTask = {};
+        $scope.istask = false;
         $scope.submittask = function(){
           if ($scope.newTask.taskname && $scope.newTask.taskname.trim() !== "") {
                       $scope.tasklist.push({
@@ -90,6 +91,7 @@ app.controller('myctrl' , function($scope , $interval , $timeout){
                       });
 
                   }
+                   $scope.istask = true;
                   // Clear form after adding
                       $scope.newTask = {};
               };

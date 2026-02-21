@@ -37,14 +37,15 @@
     </div>
 
     <!-- Add Task -->
-    <div class="add">
+    <div class="add" >
       <input type="text" placeholder="Add a new task..." class="inp" ng-model="newTask.taskname">
       <button class="btn" ng-click="submittask()">+ Add</button>
     </div>
 
+
     <!-- Task Item -->
     <div class="task">
-      <div class="dot"></div>
+     
       <div ng-repeat="t in tasklist">
         <h3 class="tname" >{{t.tname}}</h3>
         <p class="time">Feb 20, 11:34 PM</p>
@@ -59,8 +60,9 @@
       </div>
       <h3 class="pct">0% Complete</h3>
     </div>
-
   </div>
+
+
 
 
 </div>
