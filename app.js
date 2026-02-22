@@ -124,7 +124,76 @@ $scope.startProgress = function(task){
 };
 
 
-              
+
+$timeout(function() {
+
+  var tl = gsap.timeline()
+    tl.from(".keep", {
+      y: 50,
+      opacity: 0,
+      duration: 1.5,
+      stagger: 1
+    });
+
+  
+
+gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from(".video" , {
+      opacity: 1,
+      duration:1,
+      ease: "power2.out",
+      scale: 0.4,
+      
+      scrollTrigger: {
+       trigger:".video",
+       scroller:"body",
+       markers:false,
+       start:"top 30%",
+       end:"top 20%",
+       scrub:1
+  }
+    });
+
+
+
+  }, 0);
+      
+const tl = gsap.timeline();
+
+  tl.from(".keep" , {
+    y:50,
+    duration:1,
+    opacity:0.2,
+     scrollTrigger: {
+       trigger:".keep",
+       scroller:"body",
+       markers:false,
+       start:"top 30%",
+       scrub:3
+  }
+  })
+
+  gsap.from(".box" , {
+     duration :3,
+     color : "red",
+     scale:0.5,
+     stagger:0.5,
+    scrollTrigger: {
+       trigger:".keep",
+       scroller:"body",
+       markers:true,
+       start:"top 25%",
+      end:"top -100%",
+       scrub:false
+  }
+  })
+
+
+
+
+
+
   });
 
    
