@@ -1,85 +1,79 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.min.js" integrity="sha512-nKXmKvJyiGQy343jatQlzDprflyB5c+tKCzGP3Uq67v+lmzfnZUi/ZT+fc6ITZfSC5HhaBKUIvr/nTLCV+7F+Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-     <link rel="stylesheet" href="tasks.css">
-</head>
-<body>
+<div class="taskcontainer"  ng-controller="myctrl">
 
-<div class="container7">
-  <div class="current">
-    <div class="currenttext">
-<span class="current">Current<span class="task">Tasks</span></span> 
-<p>Organize your goals into actionable tasks. Track time, maintain focus, and achieve more.</p>
-    </div>
-  </div>
-</div>
 
 
 
 <!-- form -->
 
-<div class="setTask">
-    <div class="tp-form-card">
+<!-- 
+<div class="tasklist" ng-repeat="t in tasklist">
+<h2 > {{t.tname}} </h2>
+<p>{{t.tdesc}}</p>
+<p>{{t.tpriority}}</p>
+</div> -->
 
-        <!-- Task Title -->
-        <label class="tp-main-label">What's your task?</label>
-        <input type="text" 
-               ng-model="taskname"
-               class="tp-text-input" 
-               placeholder="e.g., Design landing page, Write API documentation...">
-
-        <!-- Pomodoro & Priority -->
-        <div class="tp-flex-row">
-
-            <div class="tp-flex-col">
-                <label class="tp-sub-label">Estimated Pomodoros</label>
-                <select class="tp-select-input">
-                    <option>1 Pomodoro (25 min)</option>
-                    <option>2 Pomodoros (50 min)</option>
-                    <option>3 Pomodoros (75 min)</option>
-                </select>
-            </div>
-
-            <div class="tp-flex-col">
-                <label class="tp-sub-label">Priority</label>
-                <select class="tp-select-input" ng-model="taskpriority">
-                    <option> High</option>
-                    <option> Medium</option>
-                    <option> Low</option>
-                </select>
-            </div>
-
-        </div>
-
-        <!-- Description -->
-        <label class="tp-main-label" style="margin-top: 20px;">
-            Task description (optional)
-        </label>
-
-        <textarea class="tp-textarea-input" ng-model="taskdesc"
-                  placeholder="Add any notes or details about this task...">
-        </textarea>
-
-        <!-- Button -->
-        <button class="tp-submit-btn" ng-click="submittask">+ Add Task</button>
-
+  <div class="app">
+ <!-- heading  -->
+    <div class="head">
+    <h1 class="ttl">Task Manager</h1>
+    <p class="sub">Turn Plans into Progress.</p>
     </div>
+
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="card">
+        <h2 class="num">{{taskCount}}</h2>
+        <p>Total Tasks</p>
+      </div>
+
+      <div class="card">
+        <h2 class="num ok">0</h2>
+        <p>Completed</p>
+      </div>
+
+      <div class="card">
+        <h2 class="num pend">1</h2>
+        <p>Pending</p>
+      </div>
+    </div>
+
+    <!-- Add Task -->
+    <div class="add" >
+      <input type="text" placeholder="Add a new task..." class="inp" ng-model="newTask.taskname">
+      <button class="btn" ng-click="submittask()">+ Add</button>
+    </div>
+
+
+    <!-- Task Item -->
+    <div class="task">
+     
+     <div ng-repeat="t in tasklist" class="tasklist">
+
+    <div class="taskname">
+        <h3 class="tname">{{t.tname}}</h3>
+        <button class="btn" ng-click="startProgress(t)">
+            Focus Initiate
+        </button>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-bar"
+             ng-style="{'width': t.progress + '%'}">
+            {{t.progress}}%
+        </div>
+    </div>
+
 </div>
+      </div>
+
+
+
+
 </div>
 
-<div class="alltask" ng-show="istask">
-<h2>{{taskname}}</h2>
-<p>{{taskdesc}}</p>
-<p>{{taskpriority}}</p>
-</div>
 
 
-
-  </body>
-  </html>
 
 
