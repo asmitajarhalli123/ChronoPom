@@ -199,7 +199,7 @@ const tl = gsap.timeline();
 
 
     $timeout(function () {
-
+// asdasd
         // BAR CHART
         const barCtx = document.getElementById("barChart");
 
