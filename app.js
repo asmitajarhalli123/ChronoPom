@@ -154,10 +154,6 @@ gsap.registerPlugin(ScrollTrigger);
        scrub:1
   }
     });
-
-
-
-
   }, 0);
       
 const tl = gsap.timeline();
@@ -259,6 +255,13 @@ const tl = gsap.timeline();
     }, 500); // small delay to ensure DOM loaded
 
 
+
+    // const tl1 = gsap.timeline();
+
+    // tl1.from(.mainhead , {
+    //   y : 100,
+    //   duration : 5 
+    // })
 
 });
 

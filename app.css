@@ -1235,7 +1235,7 @@ select:focus {
 
 .tp-page-wrapper {
     background-color: #d9d2c7;
-    min-height: 100vh;
+    min-height: 100vh; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1549,11 +1549,6 @@ video::-webkit-media-controls-start-playback-button {
 
 
 /* chart_css */
-body{
-    background:#f3f3f3;
-    font-family: Arial;
-    padding:30px;
-}
 
 .card{
     background:white;
@@ -1561,9 +1556,90 @@ body{
     border-radius:15px;
     margin-bottom:40px;
     box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    width: 40%;
 }
 
 canvas{
     width:100% !important;
     height:300px !important;
+}
+
+.chartContainer1{
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15%;
+  padding: 3%;
+  width: 100%;
+  background-color: #5c6275;
+   box-shadow:0 10px 25px rgba(0,0,0,0.2);
+   border-radius: 20px;
+}
+
+.chart1{
+  background-color: #000c31;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 40%;
+  height: 220%;
+  border-radius: 20px;
+  padding: 3%;
+}
+
+.chart2{
+  background-color: #000c31;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 45%;
+  height: 220%;
+  padding: 3%;
+  border-radius: 20px;
+}
+
+.chartContainer2{
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+ 
+  padding: 3%;
+  width: 100%;
+  background-color: #5c6275;
+   box-shadow:0 10px 25px rgba(0,0,0,0.2);
+   border-radius: 20px;
+   
+}
+
+.chart3{
+  background-color: #000c31;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 75%;
+  height: 220%;
+  padding: 3%;
+  border-radius: 20px;
+  margin-left: 7%;
+}
+
+.info{
+  margin-top: 15%;
+  margin-left: 15%;
+  padding-right: 30%;
+}
+
+.mainhead{
+  font-size: 500%;
+  color: #000c31;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.subhead{
+  font-size: 110%;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 150%;
+  word-spacing: 10%;
+  letter-spacing: 0.5%;
+  color:rgb(66, 64, 64);
 }
