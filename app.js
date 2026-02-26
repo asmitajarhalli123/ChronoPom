@@ -157,6 +157,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 
 
+
   }, 0);
       
 const tl = gsap.timeline();
@@ -182,7 +183,7 @@ const tl = gsap.timeline();
     scrollTrigger: {
        trigger:".keep",
        scroller:"body",
-       markers:true,
+       markers:false,    
        start:"top 25%",
       end:"top -100%",
        scrub:false
@@ -194,8 +195,74 @@ const tl = gsap.timeline();
 
 
 
-  });
+//var app = angular.module("myApp", []);
+
+
+    $timeout(function () {
+// asdasd
+        // BAR CHART
+        const barCtx = document.getElementById("barChart");
+
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+                datasets: [{
+                    label: "Tasks",
+                    data: [8,6,12,9,11,5,7],
+                    backgroundColor: "#8b5cf6"
+                },{
+                    label: "Pomodoros",
+                    data: [18,15,28,21,25,12,16],
+                    backgroundColor: "#06b6d4"
+                }]
+            }
+        });
+
+
+        // LINE CHART
+        const lineCtx = document.getElementById("lineChart");
+
+        new Chart(lineCtx, {
+            type: 'line',
+            data: {
+                labels: ["Week1","Week2","Week3","Week4","Week5","Week6"],
+                datasets: [{
+                    label: "Score",
+                    data: [650,720,880,1050,980,1300],
+                    borderColor: "#22c55e",
+                    tension: 0.4
+                }]
+            }
+        });
+
+
+        // SCATTER CHART
+        const scatterCtx = document.getElementById("scatterChart");
+
+        new Chart(scatterCtx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: "Scatter Data",
+                    data: [
+                        {x:5,y:7},
+                        {x:10,y:15},
+                        {x:15,y:10},
+                        {x:20,y:25}
+                    ],
+                    backgroundColor: "#f43f5e"
+                }]
+            }
+        });
+
+    }, 500); // small delay to ensure DOM loaded
+
+
+
+});
 
    
+
 
 

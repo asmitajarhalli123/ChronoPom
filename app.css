@@ -1547,3 +1547,23 @@ video::-webkit-media-controls-start-playback-button {
   color: #00ff77;
 }
 
+
+/* chart_css */
+body{
+    background:#f3f3f3;
+    font-family: Arial;
+    padding:30px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:40px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+canvas{
+    width:100% !important;
+    height:300px !important;
+}
