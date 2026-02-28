@@ -35,7 +35,7 @@
             </div>
         </div>
 
-<div class="containerpro">
+<!-- <div class="containerpro">
     <div class="asc">
     <h1>Achievements</h1>
     <p class="subtitle">Unlock badges by hitting milestones</p>
@@ -132,9 +132,52 @@
             <p>1245/2000</p>
         </div>
 
+    </div> 
+</div>-->
+
+    <div class="card-container">
+    <div class="card"
+         ng-repeat="badge in badges"
+         ng-click="openPopup(badge)">
+
+        <div class="level">{{badge.level}}</div>
+
+        <div class="icon">{{badge.icon}}</div>
+
+        <h2>{{badge.name}}</h2>
+        <p>{{badge.desc}}</p>
+
+        <button class="unlock-btn" ng-if="badge.unlocked">
+            UNLOCKED
+        </button>
+
+        <button class="locked-btn" ng-if="!badge.unlocked">
+            LOCKED
+        </button>
     </div>
 </div>
 
+
+<!-- POPUP -->
+<div class="popup-overlay" ng-show="showPopup">
+    <div class="popup">
+
+        <div class="popup-icon">{{selected.icon}}</div>
+        <h2>Achievement Unlocked</h2>
+        <h1>{{selected.name}}</h1>
+        <p>{{selected.desc}}</p>
+
+        <div class="xp">+50 XP</div>
+
+        <button class="claim-btn" ng-click="closePopup()">
+            CLAIM REWARD
+        </button>
+
+    </div>
+</div>
+
+
+<script src="app.js"></script>
 
     </section>
 

@@ -1643,3 +1643,121 @@ canvas{
   letter-spacing: 0.5%;
   color:rgb(66, 64, 64);
 }
+
+
+
+/* achicvements */
+
+
+.title {
+    text-align: center;
+    padding: 30px;
+    color: gold;
+    letter-spacing: 2px;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.card {
+    width: 260px;
+    padding: 20px;
+    border-radius: 15px;
+    background: #1b263b;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px gold;
+}
+
+.level {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: gold;
+    color: black;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+.icon {
+    font-size: 50px;
+    margin: 20px 0;
+}
+
+.unlock-btn {
+    background: gold;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.locked-btn {
+    background: gray;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    color: white;
+}
+
+/* POPUP */
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    width: 350px;
+    background: #1b263b;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    animation: popupAnim 0.4s ease;
+    box-shadow: 0 0 30px gold;
+}
+
+.popup-icon {
+    font-size: 70px;
+}
+
+.xp {
+    margin: 20px;
+    background: gold;
+    color: black;
+    padding: 10px;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.claim-btn {
+    background: orange;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@keyframes popupAnim {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+}
