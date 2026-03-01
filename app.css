@@ -1649,6 +1649,122 @@ canvas{
 /* achicvements */
 
 
+/* .title {
+    text-align: center;
+    padding: 30px;
+    color: gold;
+    letter-spacing: 2px;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.card {
+    width: 260px;
+    padding: 20px;
+    border-radius: 15px;
+    background: #1b263b;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px gold;
+}
+
+.level {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: gold;
+    color: black;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+.icon {
+    font-size: 50px;
+    margin: 20px 0;
+}
+
+.unlock-btn {
+    background: gold;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.locked-btn {
+    background: gray;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    color: white;
+}
+
+
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    width: 350px;
+    background: #1b263b;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    animation: popupAnim 0.4s ease;
+    box-shadow: 0 0 30px gold;
+}
+
+.popup-icon {
+    font-size: 70px;
+}
+
+.xp {
+    margin: 20px;
+    background: gold;
+    color: black;
+    padding: 10px;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.claim-btn {
+    background: orange;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@keyframes popupAnim {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+} */
+
+
+
+
 .title {
     text-align: center;
     padding: 30px;
@@ -1719,33 +1835,52 @@ canvas{
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
     display: flex;
     justify-content: center;
     align-items: center;
+    animation: fadeIn 0.4s ease;
 }
 
 .popup {
-    width: 350px;
-    background: #1b263b;
-    padding: 30px;
-    border-radius: 20px;
+    width: 380px;
+    background: linear-gradient(145deg, #1b263b, #0d1b2a);
+    padding: 40px;
+    border-radius: 25px;
     text-align: center;
-    animation: popupAnim 0.4s ease;
-    box-shadow: 0 0 30px gold;
+    animation: popupAnim 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+    box-shadow: 0 0 40px gold;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Rotating Glow Border */
+.popup::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 25px;
+    background: conic-gradient(gold, orange, gold);
+    z-index: -1;
+    animation: rotateBorder 3s linear infinite;
 }
 
 .popup-icon {
-    font-size: 70px;
+    font-size: 80px;
+    animation: bounce 1s infinite;
+    text-shadow: 0 0 20px orange;
 }
 
 .xp {
     margin: 20px;
     background: gold;
     color: black;
-    padding: 10px;
+    padding: 12px 20px;
     border-radius: 25px;
     font-weight: bold;
+    animation: pulse 1s infinite alternate;
+    box-shadow: 0 0 20px gold;
 }
 
 .claim-btn {
@@ -1755,9 +1890,55 @@ canvas{
     border-radius: 25px;
     font-weight: bold;
     cursor: pointer;
+    transition: 0.3s;
 }
 
+.claim-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px orange;
+}
+
+/* Confetti */
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: gold;
+    top: -10px;
+    animation: fall 3s linear infinite;
+}
+
+.confetti:nth-child(odd) {
+    background: orange;
+}
+
+/* Animations */
+
 @keyframes popupAnim {
-    from { transform: scale(0); }
-    to { transform: scale(1); }
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.15); }
+}
+
+@keyframes rotateBorder {
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fall {
+    0% { transform: translateY(0) rotate(0); }
+    100% { transform: translateY(500px) rotate(360deg); }
 }

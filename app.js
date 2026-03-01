@@ -271,6 +271,51 @@ const tl = gsap.timeline();
 
 //var app = angular.module("achievementApp", []);
 
+// app.controller("MainController", function($scope) {
+
+//     $scope.badges = [
+//         {
+//             name: "First Tomato",
+//             desc: "Complete your first Pomodoro session",
+//             level: "BRONZE",
+//             icon: "🍅",
+//             unlocked: true
+//         },
+//         {
+//             name: "3-Day Warrior",
+//             desc: "Maintain focus for 3 days",
+//             level: "SILVER",
+//             icon: "🔥",
+//             unlocked: true
+//         },
+//         {
+//             name: "Diamond Focus",
+//             desc: "Complete 50 sessions",
+//             level: "PLATINUM",
+//             icon: "💎",
+//             unlocked: false
+//         }
+//     ];
+
+//     $scope.showPopup = false;
+//     $scope.selected = {};
+
+//     $scope.openPopup = function(badge) {
+//         if (badge.unlocked) {
+//             $scope.selected = badge;
+//             $scope.showPopup = true;
+//         }
+//     };
+
+//     $scope.closePopup = function() {
+//         $scope.showPopup = false;
+//     };
+
+// });
+
+
+//var app = angular.module("achievementApp", []);
+
 app.controller("MainController", function($scope) {
 
     $scope.badges = [
