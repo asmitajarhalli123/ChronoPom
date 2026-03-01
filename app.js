@@ -252,69 +252,12 @@ const tl = gsap.timeline();
             }
         });
 
-    }, 500); // small delay to ensure DOM loaded
-
-
-
-    // const tl1 = gsap.timeline();
-
-    // tl1.from(.mainhead , {
-    //   y : 100,
-    //   duration : 5 
-    // })
+    }, 500); 
 
 });
 
    
 
-// achivements
-
-//var app = angular.module("achievementApp", []);
-
-// app.controller("MainController", function($scope) {
-
-//     $scope.badges = [
-//         {
-//             name: "First Tomato",
-//             desc: "Complete your first Pomodoro session",
-//             level: "BRONZE",
-//             icon: "🍅",
-//             unlocked: true
-//         },
-//         {
-//             name: "3-Day Warrior",
-//             desc: "Maintain focus for 3 days",
-//             level: "SILVER",
-//             icon: "🔥",
-//             unlocked: true
-//         },
-//         {
-//             name: "Diamond Focus",
-//             desc: "Complete 50 sessions",
-//             level: "PLATINUM",
-//             icon: "💎",
-//             unlocked: false
-//         }
-//     ];
-
-//     $scope.showPopup = false;
-//     $scope.selected = {};
-
-//     $scope.openPopup = function(badge) {
-//         if (badge.unlocked) {
-//             $scope.selected = badge;
-//             $scope.showPopup = true;
-//         }
-//     };
-
-//     $scope.closePopup = function() {
-//         $scope.showPopup = false;
-//     };
-
-// });
-
-
-//var app = angular.module("achievementApp", []);
 
 app.controller("MainController", function($scope) {
 
@@ -357,3 +300,75 @@ app.controller("MainController", function($scope) {
     };
 
 });
+
+
+
+
+
+// add task js 
+
+// app.controller("MainController", function($scope, $timeout) {
+
+//     // If tasks already exist, keep them
+//     if (!$scope.tasks) {
+//         $scope.tasks = [];
+//     }
+
+//     // Default values (won’t break old UI)
+//     $scope.taskName = "";
+//     $scope.priority = "Medium";
+//     $scope.category = "Work";
+//     $scope.pomodoros = 1;
+
+//     // Notification control
+//     $scope.showNotification = false;
+
+//     // Add Task Function
+//     $scope.addTask = function () {
+
+//         if (!$scope.taskName || $scope.taskName.trim() === "") {
+//             return;
+//         }
+
+//         var newTask = {
+//             name: $scope.taskName,
+//             priority: $scope.priority,
+//             category: $scope.category,
+//             pomodoros: $scope.pomodoros,
+//             done: 0,
+//             completed: false
+//         };
+
+//         $scope.tasks.push(newTask);
+
+//         // Clear input
+//         $scope.taskName = "";
+//         $scope.pomodoros = 1;
+//         $scope.priority = "Medium";
+//         $scope.category = "Work";
+
+//         // Show notification
+//         $scope.showNotification = true;
+
+//         $timeout(function () {
+//             $scope.showNotification = false;
+//         }, 2000);
+//     };
+
+// });
+
+// app.controller("MainController", function($scope, $timeout){
+
+//     $scope.showNotification = false;
+
+//     $scope.addTask = function(){
+
+//         $scope.showNotification = true;
+
+//         $timeout(function(){
+//             $scope.showNotification = false;
+//         }, 2000);
+
+//     };
+
+// });

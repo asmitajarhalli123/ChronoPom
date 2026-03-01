@@ -1,28 +1,16 @@
 
 <div class="taskcontainer"  ng-controller="myctrl">
 
-
-
-
-<!-- form -->
-
-<!-- 
-<div class="tasklist" ng-repeat="t in tasklist">
-<h2 > {{t.tname}} </h2>
-<p>{{t.tdesc}}</p>
-<p>{{t.tpriority}}</p>
-</div> -->
-
   <div class="app">
- <!-- heading  -->
+
     <div class="head">
     <h1 class="ttl">Task Manager</h1>
     <p class="sub">Turn Plans into Progress.</p>
-    </div>
+  </div>
 
 
     <!-- Stats -->
-    <div class="stats">
+    <!-- <div class="stats">
       <div class="card">
         <h2 class="num">{{taskCount}}</h2>
         <p>Total Tasks</p>
@@ -39,14 +27,14 @@
       </div>
     </div>
 
-    <!-- Add Task -->
+     Add Task 
     <div class="add" >
       <input type="text" placeholder="Add a new task..." class="inp" ng-model="newTask.taskname">
       <button class="btn" ng-click="submittask()">+ Add</button>
     </div>
 
 
-    <!-- Task Item -->
+    
     <div class="task">
      
      <div ng-repeat="t in tasklist" class="tasklist">
@@ -68,11 +56,74 @@
 </div>
       </div>
 
+ -->
+
+<!-- 
+ <div class="main-container">
+
+    <div class="add-box">
+        <h2>✨ Add New Task</h2>
+
+        <div class="row">
+            <input type="text" ng-model="task.name" placeholder="What needs to be done?" class="task-input">
+
+            <input type="number" ng-model="task.pomodoros" class="small-input">
+        </div>
+
+        <div class="row">
+            <select ng-model="task.priority">
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+            </select>
+
+            <select ng-model="task.category">
+                <option value="Work">Work</option>
+                <option value="Health">Health</option>
+                <option value="Creative">Creative</option>
+            </select>
+
+            <button class="add-btn" ng-click="addTask()">Add Task →</button>
+        </div>
+    </div>
 
 
+    <div class="task-grid">
+        <div class="task-card" ng-repeat="t in tasks">
+
+            <div class="card-header">
+                <h3>{{t.name}}</h3>
+                <span class="badge"
+                      ng-class="{'high':t.priority=='High','medium':t.priority=='Medium'}">
+                    {{t.priority}}
+                </span>
+            </div>
+
+            <p class="category">
+                {{t.category}} · {{t.pomodoros}} pomodoros estimated
+            </p>
+
+            <div class="progress">
+                {{t.done}} / {{t.pomodoros}} 🍅 done
+            </div>
+
+            <div class="complete-box">
+                <input type="checkbox" ng-model="t.completed">
+                Completed
+            </div>
+
+        </div>
+    </div>
 
 </div>
 
+
+<div class="notification" ng-show="showNotification">
+    Task Added Successfully!
+</div>
+
+<script src="app.js"></script>
+</div>
+ -->
 
 
 

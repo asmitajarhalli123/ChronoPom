@@ -1646,124 +1646,9 @@ canvas{
 
 
 
-/* achicvements */
 
 
-/* .title {
-    text-align: center;
-    padding: 30px;
-    color: gold;
-    letter-spacing: 2px;
-}
-
-.card-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 30px;
-}
-
-.card {
-    width: 260px;
-    padding: 20px;
-    border-radius: 15px;
-    background: #1b263b;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.3s;
-    position: relative;
-}
-
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px gold;
-}
-
-.level {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: gold;
-    color: black;
-    padding: 4px 10px;
-    border-radius: 15px;
-    font-size: 12px;
-}
-
-.icon {
-    font-size: 50px;
-    margin: 20px 0;
-}
-
-.unlock-btn {
-    background: gold;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 20px;
-    font-weight: bold;
-}
-
-.locked-btn {
-    background: gray;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 20px;
-    color: white;
-}
-
-
-
-.popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.popup {
-    width: 350px;
-    background: #1b263b;
-    padding: 30px;
-    border-radius: 20px;
-    text-align: center;
-    animation: popupAnim 0.4s ease;
-    box-shadow: 0 0 30px gold;
-}
-
-.popup-icon {
-    font-size: 70px;
-}
-
-.xp {
-    margin: 20px;
-    background: gold;
-    color: black;
-    padding: 10px;
-    border-radius: 25px;
-    font-weight: bold;
-}
-
-.claim-btn {
-    background: orange;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-@keyframes popupAnim {
-    from { transform: scale(0); }
-    to { transform: scale(1); }
-} */
-
-
-
+/* Achivements */
 
 .title {
     text-align: center;
@@ -1827,7 +1712,7 @@ canvas{
     color: white;
 }
 
-/* POPUP */
+
 
 .popup-overlay {
     position: fixed;
@@ -1855,7 +1740,6 @@ canvas{
     overflow: hidden;
 }
 
-/* Rotating Glow Border */
 .popup::before {
     content: "";
     position: absolute;
@@ -1898,7 +1782,7 @@ canvas{
     box-shadow: 0 0 15px orange;
 }
 
-/* Confetti */
+
 .confetti {
     position: absolute;
     width: 8px;
@@ -1911,9 +1795,6 @@ canvas{
 .confetti:nth-child(odd) {
     background: orange;
 }
-
-/* Animations */
-
 @keyframes popupAnim {
     0% { transform: scale(0.5); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
@@ -1942,3 +1823,136 @@ canvas{
     0% { transform: translateY(0) rotate(0); }
     100% { transform: translateY(500px) rotate(360deg); }
 }
+
+
+
+
+/* Add task css */
+/* 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: white;
+}
+
+.main-container {
+    width: 90%;
+    margin: 40px auto;
+}
+
+
+.add-box {
+    background: rgba(255,255,255,0.05);
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+}
+
+.row {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.task-input {
+    flex: 2;
+}
+
+.small-input {
+    width: 100px;
+}
+
+input, select {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
+
+input::placeholder {
+    color: #ccc;
+}
+
+.add-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg,#ff7e5f,#8f3cff);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    transform: scale(1.05);
+}
+
+
+.task-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+    gap: 20px;
+}
+
+.task-card {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 15px;
+    border-top: 3px solid #00f5c4;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.high {
+    background: #ff4d4d;
+}
+
+.medium {
+    background: #ffc107;
+    color: black;
+}
+
+.category {
+    margin: 10px 0;
+    opacity: 0.8;
+}
+
+.progress {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.complete-box {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #00c853;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+} */
