@@ -4,7 +4,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     color: black;
-  
+    height: 500vh;
 }
 
 
@@ -104,7 +104,7 @@ ng-view {
 }
 
 .keep{
-    color: rgb(59, 57, 57);
+  color: rgb(228, 221, 221);
    padding-top: 17%;
    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
    font-size: 300%;
@@ -113,9 +113,9 @@ ng-view {
 }
 
 .strong{
-   color: #35A29F;
-   opacity: 36%;
-    background: linear-gradient(to right, #00d4ff, #350B40);
+   
+   opacity: 40%;
+    background: linear-gradient(to right,#0ea5e9 , white , #5ab9ca );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -130,51 +130,50 @@ ng-view {
 }
 
 .box{
-    height: 120%;
-    width: 22%;
+    height: 30%;
+    width: 20%;
     align-items: center;
     justify-content: center;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 4px 4px #004d87;
+   padding: 5px;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    border-radius: 11%;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
     transform: translate(scale(1.5));
-    background: linear-gradient(#350B40 ,#4e5b83 );
+    background-color: rgba(67, 89, 112, 0.4); /* Dodger blue with transparency */
     
 }
 
 .box:hover{
-     box-shadow: 4px 4px 10px 10px #111a3c;
+     transform: rotate(10deg);
+     border-bottom: 10px solid #000c31;
+     /* transform: scale(1.1); */
+      
 }
-/* .box:hover{
-     box-shadow: 4px 4px 4px 4px #97FEED;
-     background-color: #AED2FF;
-     color: black;
-     transform: 15s;
-     border-radius: 8%;
-     opacity: 90%;
-     box-shadow: 5px 5px 10px gray;
-     transform: scale(1.09);
-} */
-/* .text:hover{
-    color: white;
-} */
 
-/* .text2:hover{
-    color: white;
-} */
 
-.text{
-    color: rgb(164, 154, 154);
+
+.box .text{
+    
+    font-weight: 100;
+    color: #c6ded9;
     font-weight: 800;
     margin-right: 3.5%;
    padding-top: 3%;
+   font-size: 100%;
+font-weight:lighter;
+font-family:'Lato', sans-serif;
+line-height: 5px;
+word-spacing: 5px;
+opacity: 60%;
 }
 
-.text2{
-    font-size: 150%;
-    font-weight: 900;
+ .box .text2{
+    font-size: 210%;
+    font-weight: bolder;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: #000c31;
 }
 
 .container2{
@@ -184,11 +183,26 @@ ng-view {
     margin-top: 5%;
     padding-left: 10%;
     font-family:Georgia, 'Times New Roman', Times, serif;
-    color: rgb(49, 47, 47);
-  
-    font-size: 90%;
+   line-height: 7px;
     margin-top: 15%;
+  margin-left: 5%;
+ 
 }
+
+.container2 p{
+    color:#d7f9f3;
+    font-size: 55%;
+    padding-left: 15px;
+}
+
+.container2 h2{
+  font-size: 150%;
+  font-weight: 100;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding: 10px;
+}
+
+
 
 .icon
 {
@@ -197,6 +211,7 @@ ng-view {
     gap: 2px;
     color:  #B7BDF7;
     font-size: 10%;
+    
 }
 .container3{
     height:25%;
@@ -282,7 +297,7 @@ color: rgb(88, 86, 86);
 font-size: 500%;
 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 margin-bottom: 25%;
-
+font-family: 'Playfair Display', serif;
 
 }
 
@@ -292,7 +307,8 @@ margin-bottom: 25%;
 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 color: #547792;
 margin-bottom: 30%;
-opacity: 35%;}
+opacity: 75%;
+}
 
 .text{
     padding-left: 8%;
@@ -310,6 +326,7 @@ opacity: 35%;}
 .mintext p{
 margin-top: 15%;
 font-size: 120%;
+color:#c2ded9;
 }
 
 .mintext{
@@ -461,6 +478,13 @@ height:70px;
   align-items: center;
   justify-content: center;
  opacity: 80%;
+ background: linear-gradient(100deg , #8fbeb5 , #7091F5);
+}
+
+.timer{
+  background: linear-gradient(90deg , #a892c2  , #91bfc7);
+  height: 80vh;
+  opacity: 70%;
 }
 
 .timer-box h1{
@@ -495,23 +519,30 @@ height:70px;
   flex-direction: column;
   text-align: center;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  opacity: 30%;
+  
   font-weight: 300%;
-  color: rgb(55, 50, 50);
+  
 }
 
-.logo h1{
+ .footer .logo h1{
   font-size: 1000%;
-  opacity: 28%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: whitesmoke;
 }
-.msg{
+
+.footer .logo h3{
+  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: whitesmoke;
+}
+.footer .msg p{
   align-items: center;
   display: flex;
   text-align: center;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  opacity: 30%;
+  
   font-weight: 300%;
-  color: rgb(55, 50, 50);
+color: whitesmoke;
   justify-content: space-around;
 }
 
@@ -1560,8 +1591,8 @@ video::-webkit-media-controls-start-playback-button {
 }
 
 canvas{
-    width:100% !important;
-    height:300px !important;
+    width:100% ;
+    height:300px;
 }
 
 .chartContainer1{
@@ -1828,16 +1859,11 @@ canvas{
 
 
 /* Add task css */
-{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+
 
 html, body {
-    height: 100%;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+   
+    background: linear-gradient(120deg , #4e5b83  , rgb(61, 5, 5), #350B40);
     color: white;
 }
 
@@ -1954,4 +1980,60 @@ input::placeholder {
     padding: 12px 20px;
     border-radius: 8px;
     font-weight: bold;
-} 
+}
+
+.chronohead{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-top: 15%;
+}
+
+.lefthead{
+  height: 60vh;
+  width: 45%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 310%;
+
+ font-weight: bolder;
+ line-height: 0.1%;
+
+ }
+
+.lefthead p{
+font-size: 60%;
+font-weight:300;
+color: #afd8d0;
+opacity: 60%;
+word-spacing: 2px;
+font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.lefthead h1{
+  letter-spacing: 1.2px;
+  color: #bae3ec;
+  opacity: 80%;
+   text-shadow: 0 0 9px #afd8d0;
+   padding-left: 15%;
+    font-family:'Playfair Display', serif;
+}
+.righthead{
+  height: 60vh;
+  width: 45%;
+/* background-color: yellow; */
+}
+
+.righthead p{
+font-size: 130%;
+font-weight:lighter;
+font-family:'Lato', sans-serif;
+color:#afd8d0 ;
+padding: 10%;
+line-height:33px;
+word-spacing: 1.6px;
+}
+
+

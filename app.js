@@ -1,3 +1,4 @@
+
 // Initialize the app with ngRoute dependency
 var app = angular.module('myapp',['ngRoute']);
 
@@ -124,68 +125,42 @@ $scope.startProgress = function(task){
 };
 
 
-
-$timeout(function() {
-
-  var tl = gsap.timeline()
-    tl.from(".keep", {
-      y: 50,
-      opacity: 0,
-      duration: 1.5,
-      stagger: 1
-    });
-
-  
-
-gsap.registerPlugin(ScrollTrigger);
-
-    gsap.from(".video" , {
-      opacity: 1,
-      duration:1,
-      ease: "power2.out",
-      scale: 0.4,
-      
-      scrollTrigger: {
-       trigger:".video",
-       scroller:"body",
-       markers:false,
-       start:"top 30%",
-       end:"top 20%",
-       scrub:1
-  }
-    });
-  }, 0);
+// gsap
       
 const tl = gsap.timeline();
 
-  tl.from(".keep" , {
-    y:50,
-    duration:1,
-    opacity:0.2,
-     scrollTrigger: {
-       trigger:".keep",
-       scroller:"body",
-       markers:false,
-       start:"top 30%",
-       scrub:3
-  }
+  tl.from(".lefthead h1" ,{
+    x:-50,
+    duration:1.5,
+    opacity:0
   })
 
-  gsap.from(".box" , {
-     duration :3,
-     color : "red",
-     scale:0.5,
-     stagger:0.5,
-    scrollTrigger: {
-       trigger:".keep",
-       scroller:"body",
-       markers:false,    
-       start:"top 25%",
-      end:"top -100%",
-       scrub:false
-  }
+   tl.from(".righthead p" ,{
+    x:50,
+    duration:1.5,
+    opacity:0
   })
 
+  tl.from(".lefthead p" ,{
+    x:0,
+    y:0,
+    duration:1.5,
+    opacity:0
+  })
+
+  // tl.from(".ks" , {
+  //   y :20,
+  //   duration:5,
+  //   opacity:0,
+  //     scrollTrigger: {
+  //     trigger: ".ks",      // 👈 use the element itself
+  //   start: "top 80%",    // 👈 REQUIRED
+  //   end: "top 30%",
+  //   markers: true,
+  //   scrub: 3
+  //   }
+    
+  // });
 
 
 
