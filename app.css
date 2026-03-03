@@ -1828,8 +1828,7 @@ canvas{
 
 
 /* Add task css */
-/* 
-* {
+{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -1955,4 +1954,4 @@ input::placeholder {
     padding: 12px 20px;
     border-radius: 8px;
     font-weight: bold;
-} */
+} 

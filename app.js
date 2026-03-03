@@ -256,10 +256,13 @@ const tl = gsap.timeline();
 
 });
 
-   
+   //Achievements
 
+app.controller("MainController", function($scope, $timeout) {
 
-app.controller("MainController", function($scope) {
+    
+    //   ACHIEVEMENTS SECTION
+    
 
     $scope.badges = [
         {
@@ -299,76 +302,43 @@ app.controller("MainController", function($scope) {
         $scope.showPopup = false;
     };
 
+
+  
+       //TASK SECTION
+    
+
+    $scope.tasks = [];
+
+    $scope.task = {
+        priority: "Medium",
+        category: "Work",
+        pomodoros: 1
+    };
+
+    $scope.showNotification = false;
+
+    $scope.addTask = function() {
+
+        if (!$scope.task.name) return;
+
+        var newTask = {
+            name: $scope.task.name,
+            priority: $scope.task.priority,
+            category: $scope.task.category,
+            pomodoros: $scope.task.pomodoros,
+            done: 0,
+            completed: false
+        };
+
+        $scope.tasks.push(newTask);
+
+        $scope.task.name = "";
+
+        $scope.showNotification = true;
+
+        $timeout(function(){
+            $scope.showNotification = false;
+        }, 2000);
+    };
+
 });
-
-
-
-
-
-// add task js 
-
-// app.controller("MainController", function($scope, $timeout) {
-
-//     // If tasks already exist, keep them
-//     if (!$scope.tasks) {
-//         $scope.tasks = [];
-//     }
-
-//     // Default values (won’t break old UI)
-//     $scope.taskName = "";
-//     $scope.priority = "Medium";
-//     $scope.category = "Work";
-//     $scope.pomodoros = 1;
-
-//     // Notification control
-//     $scope.showNotification = false;
-
-//     // Add Task Function
-//     $scope.addTask = function () {
-
-//         if (!$scope.taskName || $scope.taskName.trim() === "") {
-//             return;
-//         }
-
-//         var newTask = {
-//             name: $scope.taskName,
-//             priority: $scope.priority,
-//             category: $scope.category,
-//             pomodoros: $scope.pomodoros,
-//             done: 0,
-//             completed: false
-//         };
-
-//         $scope.tasks.push(newTask);
-
-//         // Clear input
-//         $scope.taskName = "";
-//         $scope.pomodoros = 1;
-//         $scope.priority = "Medium";
-//         $scope.category = "Work";
-
-//         // Show notification
-//         $scope.showNotification = true;
-
-//         $timeout(function () {
-//             $scope.showNotification = false;
-//         }, 2000);
-//     };
-
-// });
-
-// app.controller("MainController", function($scope, $timeout){
-
-//     $scope.showNotification = false;
-
-//     $scope.addTask = function(){
-
-//         $scope.showNotification = true;
-
-//         $timeout(function(){
-//             $scope.showNotification = false;
-//         }, 2000);
-
-//     };
-
-// });
