@@ -1,0 +1,237 @@
+ 
+ <head><link rel="stylesheet" href="app.css"></head>
+ 
+ <section class="progress-section">
+        <div class="contain">
+            <h1 class="title1">ChronoPom Progress</h1>
+            <p class="subtitle">Track your productivity and unlock achievements</p>
+
+            <div class="cards">
+
+                <div class="card">
+                    <h3>Total Tasks</h3>
+                    <h2>127</h2>
+                    <p>Completed this session</p>
+                </div>
+
+                <div class="card">
+                    <h3>Total Pomodoros</h3>
+                    <h2>342</h2>
+                    <p>25-minute intervals</p>
+                </div>
+
+                <div class="card">
+                    <h3>Current Streak</h3>
+                    <h2 class="highlight-yellow">12 days</h2>
+                    <p>Keep it going!</p>
+                </div>
+
+                <div class="card">
+                    <h3>Productivity Score</h3>
+                    <h2 class="highlight-green">1245</h2>
+                    <p>Productivity Master</p>
+                </div>
+
+            </div>
+        </div>
+
+<!-- <div class="containerpro">
+    <div class="asc">
+    <h1>Achievements</h1>
+    <p class="subtitle">Unlock badges by hitting milestones</p>
+        </div>
+
+    <div class="cards">
+        <div class="card1 active">
+            <div class="icon">🎯</div>
+            <h3>First Steps</h3>
+            <div class="progress-bar">
+                <div class="progress" ></div>
+            </div>
+            <p>127/1</p>
+        </div>
+
+        <div class="card1 active">
+            <div class="icon">🔥</div>
+            <h3>Week Warrior</h3>
+            <div class="progress-bar">
+                <div class="progress" ></div>
+            </div>
+            <p>12/7</p>
+        </div>
+
+        <div class="card1 active">
+            <div class="icon">🍎</div>
+            <h3>Pomodoro Master</h3>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <p>342/100</p>
+        </div>
+
+        <div class="card1 active">
+            <div class="icon">✅</div>
+            <h3>Task Finisher</h3>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <p>127/50</p>
+        </div>
+
+        <div class="card1 locked">
+            <div class="icon">👑</div>
+            <h3>Consistency King</h3>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <p>12/30</p>
+        </div>
+
+        <div class="card1 active">
+            <div class="icon">📈</div>
+            <h3>Productivity Peak</h3>
+            <div class="progress-bar">
+                <div class="progress" ></div>
+            </div>
+            <p>1245/1000</p>
+        </div>
+
+        <div class="card1 locked">
+            <div class="icon">💯</div>
+            <h3>Century Club</h3>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <p>127/100</p>
+        </div>
+
+        <div class="card1 locked">
+            <div class="icon">🏃</div>
+            <h3>Marathon Runner</h3>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <p>342/500</p>
+        </div>
+
+        <div class="card1 locked">
+            <div class="icon">⚡</div>
+            <h3>Unstoppable</h3>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <p>12/60</p>
+        </div>
+
+        <div class="card1 locked">
+            <div class="icon">🏆</div>
+            <h3>Legend</h3>
+            <div class="progress-bar">
+                <div class="progress" ></div>
+            </div>
+            <p>1245/2000</p>
+        </div>
+
+    </div> 
+</div>-->
+<!-- //Achievement -->
+    <!-- <div class="card-container">
+    <div class="card"
+         ng-repeat="badge in badges"
+         ng-click="openPopup(badge)">
+
+        <div class="level">{{badge.level}}</div>
+
+        <div class="icon">{{badge.icon}}</div>
+
+        <h2>{{badge.name}}</h2>
+        <p>{{badge.desc}}</p>
+
+        <button class="unlock-btn" ng-if="badge.unlocked">
+            UNLOCKED
+        </button>
+
+        <button class="locked-btn" ng-if="!badge.unlocked">
+            LOCKED
+        </button>
+    </div>
+</div>
+
+
+
+<div class="popup-overlay" ng-show="showPopup">
+    <div class="popup">
+
+        <div class="popup-icon">{{selected.icon}}</div>
+        <h2>Achievement Unlocked</h2>
+        <h1>{{selected.name}}</h1>
+        <p>{{selected.desc}}</p>
+
+        <div class="xp">+50 XP</div>
+
+        <button class="claim-btn" ng-click="closePopup()">
+            CLAIM REWARD
+        </button>
+
+    </div>
+</div>
+
+
+<script src="app.js"></script> -->
+
+
+
+<div class="card-container">
+    <div class="card"
+         ng-repeat="badge in badges"
+         ng-click="openPopup(badge)">
+
+        <div class="level">{{badge.level}}</div>
+
+        <div class="icon">{{badge.icon}}</div>
+
+        <h2>{{badge.name}}</h2>
+        <p>{{badge.desc}}</p>
+
+        <button class="unlock-btn" ng-if="badge.unlocked">
+            UNLOCKED
+        </button>
+
+        <button class="locked-btn" ng-if="!badge.unlocked">
+            LOCKED
+        </button>
+    </div>
+</div>
+
+
+<!-- POPUP -->
+<div class="popup-overlay" ng-show="showPopup">
+    <div class="popup">
+
+        <!-- ✅ Confetti Added -->
+        <div class="confetti"
+             ng-repeat="n in [].constructor(30) track by $index">
+        </div>
+
+        <div class="popup-icon">{{selected.icon}}</div>
+        <h2>Achievement Unlocked</h2>
+        <h1>{{selected.name}}</h1>
+        <p>{{selected.desc}}</p>
+
+        <div class="xp">+50 XP</div>
+
+        <button class="claim-btn" ng-click="closePopup()">
+            CLAIM REWARD
+        </button>
+
+    </div>
+</div>
+
+<script src="app.js"></script>
+
+
+
+    </section>
+
+
+ 
