@@ -148,19 +148,36 @@ const tl = gsap.timeline();
     opacity:0
   })
 
-  gsap.from(".ks" , {
-    y :20,
-    duration:5,
+  ScrollTrigger.refresh();
+const tl2 = gsap.timeline();
+  tl2.from(".ks .keep" , {
+    y :50,
+    duration:0.7,
     opacity:0,
       scrollTrigger: {
-      trigger: ".ks",      // 👈 use the element itself
-    start: "bottom 20%",    // 👈 REQUIRED
-    end: "top 30%",
-    markers: true,
-    scrub: 3
+        trigger: ".keep",      
+        scroller:"body",
+        markers:true,    
+        start:"top 40%",
+        end:"top -100%",
+        scrub:0.5
     }
-    
   });
+
+  gsap.from(".box" , {
+    y :50,
+    duration:1,
+    opacity:0,
+     stagger: 0.3,
+      scrollTrigger: {
+        trigger: ".keep",      
+        scroller:"body",
+        markers:true,    
+        start:"top 40%",
+        end:"top -100%",
+      
+    }
+  })
 
 
 
