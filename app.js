@@ -157,7 +157,7 @@ const tl2 = gsap.timeline();
       scrollTrigger: {
         trigger: ".keep",      
         scroller:"body",
-        markers:true,    
+           
         start:"top 40%",
         end:"top -100%",
         scrub:0.5
@@ -171,12 +171,25 @@ const tl2 = gsap.timeline();
      stagger: 0.3,
       scrollTrigger: {
         trigger: ".keep",      
-        scroller:"body",
-        markers:true,    
+        scroller:"body",  
         start:"top 40%",
         end:"top -100%",
       
     }
+  })
+
+  //minutes matter make them count text
+  gsap.from(".mintext span" , {
+        y :50,
+        duration:1,
+        stagger:0.3,
+        scrollTrigger : {
+          trigger:".mintext",
+          scroller:"body",
+          markers:true,
+          start: "top 65%",
+        }
+
   })
 
 
