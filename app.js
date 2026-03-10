@@ -1,3 +1,4 @@
+
 // Initialize the app with ngRoute dependency
 var app = angular.module('myapp',['ngRoute']);
 
@@ -124,68 +125,72 @@ $scope.startProgress = function(task){
 };
 
 
-
-$timeout(function() {
-
-  var tl = gsap.timeline()
-    tl.from(".keep", {
-      y: 50,
-      opacity: 0,
-      duration: 1.5,
-      stagger: 1
-    });
-
-  
-
-gsap.registerPlugin(ScrollTrigger);
-
-    gsap.from(".video" , {
-      opacity: 1,
-      duration:1,
-      ease: "power2.out",
-      scale: 0.4,
-      
-      scrollTrigger: {
-       trigger:".video",
-       scroller:"body",
-       markers:false,
-       start:"top 30%",
-       end:"top 20%",
-       scrub:1
-  }
-    });
-  }, 0);
+// gsap
       
 const tl = gsap.timeline();
 
-  tl.from(".keep" , {
-    y:50,
-    duration:1,
-    opacity:0.2,
-     scrollTrigger: {
-       trigger:".keep",
-       scroller:"body",
-       markers:false,
-       start:"top 30%",
-       scrub:3
-  }
+  tl.from(".lefthead h1" ,{
+    x:-50,
+    duration:1.5,
+    opacity:0
   })
+
+   tl.from(".righthead p" ,{
+    x:50,
+    duration:1.5,
+    opacity:0
+  })
+
+  tl.from(".lefthead p" ,{
+    x:0,
+    y:0,
+    duration:1.5,
+    opacity:0
+  })
+
+  ScrollTrigger.refresh();
+const tl2 = gsap.timeline();
+  tl2.from(".ks .keep" , {
+    y :50,
+    duration:0.7,
+    opacity:0,
+      scrollTrigger: {
+        trigger: ".keep",      
+        scroller:"body",
+           
+        start:"top 40%",
+        end:"top -100%",
+        scrub:0.5
+    }
+  });
 
   gsap.from(".box" , {
-     duration :3,
-     color : "red",
-     scale:0.5,
-     stagger:0.5,
-    scrollTrigger: {
-       trigger:".keep",
-       scroller:"body",
-       markers:false,    
-       start:"top 25%",
-      end:"top -100%",
-       scrub:false
-  }
+    y :50,
+    duration:1,
+    opacity:0,
+     stagger: 0.3,
+      scrollTrigger: {
+        trigger: ".keep",      
+        scroller:"body",  
+        start:"top 40%",
+        end:"top -100%",
+      
+    }
   })
 
+  //minutes matter make them count text
+  gsap.from(".mintext span" , {
+        y :50,
+        duration:1,
+        stagger:0.3,
+        scrollTrigger : {
+          trigger:".mintext",
+          scroller:"body",
+          markers:true,
+          start: "top 65%",
+        }
+
+  })
 
 
 
