@@ -51,39 +51,39 @@ app.controller('myctrl' , function($scope , $interval , $timeout){
 
       var counterInterval = null;
 
-      //start the timer
-      $scope.start = function() {
+    //   //start the timer
+    //   $scope.start = function() {
        
-        if (!counterInterval) {  // prevent multiple intervals
-          counterInterval = $interval(function() {
-            $scope.count++;
-          }, 1000); // 1000ms = 1 second
-        }
-      };
+    //     if (!counterInterval) {  // prevent multiple intervals
+    //       counterInterval = $interval(function() {
+    //         $scope.count++;
+    //       }, 1000); // 1000ms = 1 second
+    //     }
+    //   };
 
       ///restart the timer
-      $scope.restart =function(){
-            $scope.count = 0;
-            if (counterInterval) {
-              $interval.cancel(counterInterval);
-              counterInterval = null;
-            }
-            $scope.start();
-      }
+    //   $scope.restart =function(){
+    //         $scope.count = 0;
+    //         if (counterInterval) {
+    //           $interval.cancel(counterInterval);
+    //           counterInterval = null;
+    //         }
+    //         $scope.start();
+    //   }
 
 
-      //go to next for break
-      $scope.next =function(){
-            $scope.count = 0;
-            if (counterInterval) {
-              $interval.cancel(counterInterval);
-              counterInterval = null;
-            }  
-      }
-        $scope.progress = 0;
-        $scope.tasklist = [];
-        $scope.newTask = {};
-        $scope.istask = false;
+    //   //go to next for break
+    //   $scope.next =function(){
+    //         $scope.count = 0;
+    //         if (counterInterval) {
+    //           $interval.cancel(counterInterval);
+    //           counterInterval = null;
+    //         }  
+    //   }
+        // $scope.progress = 0;
+        // $scope.tasklist = [];
+        // $scope.newTask = {};
+        // $scope.istask = false;
 
         // function to set task
         $scope.submittask = function(){
@@ -99,6 +99,105 @@ app.controller('myctrl' , function($scope , $interval , $timeout){
                   // Clear form after adding
                       $scope.newTask = {};
               };
+
+//timer Angular js
+// var app = angular.module("pomodoroApp", []);
+
+// app.controller("timerCtrl", function($scope,$interval){
+
+var timer = null;
+
+$scope.totalTime = 900;
+$scope.timeLeft = 900;
+
+$scope.minutes = "15";
+$scope.seconds = "00";
+
+$scope.dashOffset = 0;
+
+function updateDisplay(){
+
+let m = Math.floor($scope.timeLeft/60);
+let s = $scope.timeLeft % 60;
+
+$scope.minutes = ("0"+m).slice(-2);
+$scope.seconds = ("0"+s).slice(-2);
+
+let progress = $scope.timeLeft / $scope.totalTime;
+$scope.dashOffset = 754 - (754 * progress);
+}
+
+$scope.start = function(){
+
+if(timer) return;
+
+timer = $interval(function(){
+
+$scope.timeLeft--;
+
+updateDisplay();
+
+if($scope.timeLeft <= 0){
+
+$interval.cancel(timer);
+timer = null;
+
+alert("Timer Finished!");
+
+}
+
+},1000);
+
+};
+
+$scope.pause = function(){
+
+$interval.cancel(timer);
+timer = null;
+
+};
+
+$scope.reset = function(){
+
+$scope.pause();
+$scope.timeLeft = $scope.totalTime;
+updateDisplay();
+
+};
+
+$scope.setMode = function(mode){
+
+$scope.pause();
+
+if(mode == "pomodoro"){
+
+$scope.totalTime = 900;
+
+}
+
+if(mode == "short"){
+
+$scope.totalTime = 300;
+
+}
+
+if(mode == "long"){
+
+$scope.totalTime = 600;
+
+}
+
+$scope.timeLeft = $scope.totalTime;
+updateDisplay();
+
+};
+
+updateDisplay();
+
+// don't know files
+
+
+
 
 
 //function for task progress bar working 
@@ -261,8 +360,6 @@ const tl2 = gsap.timeline();
 
 });
 
-   //Achievements
-
 app.controller("MainController", function($scope, $timeout) {
 
     
@@ -347,3 +444,6 @@ app.controller("MainController", function($scope, $timeout) {
     };
 
 });
+
+
+
