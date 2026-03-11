@@ -271,7 +271,7 @@ body {
 }
 
 
-.timer{
+/* .timer{
      height: 50%;
     width: 55%;
     background-color:#547792;
@@ -293,7 +293,63 @@ body {
     justify-content: center;
     margin-bottom: 39%;
    
+} */
+
+body{
+background:#0b0f1a;
+color:white;
+text-align:center;
+font-family:Arial;
 }
+
+.tabs button{
+margin:10px;
+padding:10px 20px;
+background:transparent;
+border:1px solid #ff6a2a;
+color:white;
+border-radius:20px;
+}
+
+.circle{
+position:relative;
+width:300px;
+margin:auto;
+}
+
+svg{
+transform:rotate(-90deg);
+}
+
+.time{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+font-size:48px;
+font-weight:bold;
+}
+
+.controls button{
+margin:10px;
+padding:12px 20px;
+border:none;
+border-radius:20px;
+background:#ff6a2a;
+color:white;
+font-size:16px;
+}
+
+
+
+
+
+
+
+
+
+
+
 .min{
 color: rgb(88, 86, 86);
 font-size: 500%;

@@ -1,14 +1,6 @@
 <div class="container" ng-controller="myctrl">
 
 
-    <!-- <video width="600" controls class="video" autoplay muted loop playsinline >
-      
-        <source src="video.mp4" type="video/mp4">
-        
-        Your browser does not support the video tag.
-    </video> -->
-
-
 <div class="chronohead">
   <div class="lefthead">
     <h1>ChronoP<i class="fa-regular fa-clock" style="font-size:60px; color:#000c31;"></i>m</h1>
@@ -57,10 +49,6 @@ With Chronopom, time is no longer something you chase — it becomes your greate
   <h2>"Start your first session and begin your journey!"</h2>
 </div>
 
-<!-- <div class="container3">
-  <p class="next">WHAT'S NEXT</p>
-  <h3 class="task">0 task left to complete</h3>
-</div> -->
 
 
 <div class="container4">
@@ -69,7 +57,7 @@ With Chronopom, time is no longer something you chase — it becomes your greate
 <span class="min">Minutes Matter.<br></span> <span class="count">Make Them Count.</span>
 <p>Success isn’t built in hours of motivation — it’s built in focused minutes. Start now, stay consistent, and let progress stack up</p>
 <hr>
-<div class="container5">
+<!-- <div class="container5">
 <div class="timetext">
   <button  class="btnfo" >FOCUS</button>
   <button class="btnfo">LONG BREAK</button>
@@ -85,27 +73,73 @@ With Chronopom, time is no longer something you chase — it becomes your greate
   <button class="reload" ng-click="restart()"><i class="fa-solid fa-rotate"></i>
   <button class="next" ng-click="next()"><i class="fa-solid fa-arrow-right"></i>
 </button>
-</button>
+</button> -->
+<!-- </div>
 </div>
-</div>
-</div>
+</div> -->
  </div>
 
-  <div class="timer">
+  <!-- <div class="timer">
     <div class="focus2">
     <p>FOCUS</p>
     </div>
 <div class="timer-box">
   <h1>0%</h1>
   <p>PAUSED</p>
-</div>
-<!-- <p class="pro">
- SESSION PROGRESS •
-</p>
-<h1 class="pro"> 00 / 00</h1>
-  </div> -->
+</div> -->
+
 </div>
 </div>
+
+<!-- Timer HTML File -->
+
+<div class="tabs">
+    <button ng-click="setMode('pomodoro')">Pomodoro</button>
+    <button ng-click="setMode('short')">Short Break</button>
+    <button ng-click="setMode('long')">Long Break</button>
+</div>
+
+<div class="circle">
+
+    <svg width="300" height="300">
+
+        <circle cx="150" cy="150" r="120"
+        stroke="#222"
+        stroke-width="12"
+        fill="none"></circle>
+
+        <circle cx="150" cy="150" r="120"
+        stroke="#ff6a2a"
+        stroke-width="12"
+        fill="none"
+        stroke-dasharray="754"
+        stroke-dashoffset="{{dashOffset}}">
+        </circle>
+
+    </svg>
+
+    <div class="time">
+        {{minutes}}:{{seconds}}
+    </div>
+
+</div>
+
+<div class="controls">
+
+<button ng-click="start()">Start</button>
+<button ng-click="pause()">Pause</button>
+<button ng-click="reset()">Reset</button>
+
+</div>
+
+<script src="app.js"></script>
+
+
+
+
+
+
+
 
 
 <div class="container6">
