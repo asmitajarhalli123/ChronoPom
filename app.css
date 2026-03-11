@@ -1611,7 +1611,7 @@ canvas{
     width: 380px;
     background: linear-gradient(145deg, #1b263b, #0d1b2a);
     padding: 40px;
-    border-radius: 25px;
+    border-radius : 25px;
     text-align: center;
     animation: popupAnim 0.5s cubic-bezier(.68,-0.55,.27,1.55);
     box-shadow: 0 0 40px gold;
