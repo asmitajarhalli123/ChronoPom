@@ -285,7 +285,7 @@ const tl2 = gsap.timeline();
         scrollTrigger : {
           trigger:".mintext",
           scroller:"body",
-          markers:true,
+          markers:false,
           start: "top 65%",
         }
 
