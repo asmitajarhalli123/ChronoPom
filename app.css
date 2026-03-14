@@ -248,22 +248,21 @@ opacity: 60%;
     align-items: center;
     justify-content:space-around;
     display: flex;
-    flex-direction: column;
     margin-top: 10%;
   
-    gap: 4%;
+    gap: 5%;
 }
 
 .focus{
     height: 60%;
     width: 60%;
-    padding-top: 20%;
+    
     align-items: center;
     justify-content: center;
     display: flex;
     flex-direction: column;
-   margin-left: 4%;
-   text-align: center;
+   margin-left: 10%;
+   
 
 }
 
@@ -296,13 +295,18 @@ body {
    
 } */
 
-
+body{
+background:#0b0f1a;
+color:white;
+text-align:center;
+font-family:Arial;
+}
 
 .tabs button{
 margin:10px;
 padding:10px 20px;
 background:transparent;
-border:5px solid #000c31;
+border:1px solid #ff6a2a;
 color:white;
 border-radius:20px;
 }
@@ -311,16 +315,13 @@ border-radius:20px;
 position:relative;
 width:300px;
 margin:auto;
-
 }
 
 svg{
 transform:rotate(-90deg);
-
 }
 
 .time{
-
 position:absolute;
 top:50%;
 left:50%;
@@ -334,10 +335,19 @@ margin:10px;
 padding:12px 20px;
 border:none;
 border-radius:20px;
-background:#000c31;
+background:#ff6a2a;
 color:white;
 font-size:16px;
 }
+
+
+
+
+
+
+
+
+
 
 
 .min{
@@ -875,8 +885,7 @@ height:70px;
   display: flex;
   justify-content: space-between;
   gap: 20px;
- /* margin:70px auto; */
- margin-top: 17%;
+ margin:50px auto;
 }
 
 .card{
@@ -917,7 +926,7 @@ height:70px;
 .footer{
   height: 100vh;
   width: 100%;
-  padding-top: 10%;
+ 
   align-items: center;
   display: flex;
   justify-content: space-around;
