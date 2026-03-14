@@ -463,7 +463,7 @@ app.controller("MainController", function($scope, $timeout) {
 });
 
 //app.js
-
+//routing updated
 
 app.config(function($routeProvider){
 
