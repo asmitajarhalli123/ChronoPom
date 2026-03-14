@@ -464,4 +464,32 @@ app.controller("MainController", function($scope, $timeout) {
 
 //app.js
 
-// app.js
+
+app.config(function($routeProvider){
+
+$routeProvider
+.when("/tasks",{
+templateUrl:"tasks.html"
+})
+
+.when("/analytics",{
+templateUrl:"analytics.html"
+})
+
+.when("/progress",{
+templateUrl:"progress.html"
+})
+
+.otherwise({
+redirectTo:"/tasks"
+});
+
+});
+
+app.controller("mainCtrl", function($scope, $location){
+
+$scope.$on("$routeChangeSuccess", function(){
+$scope.currentRoute = $location.path();
+});
+
+});
