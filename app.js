@@ -277,18 +277,35 @@ const tl2 = gsap.timeline();
     }
   })
 
-  //minutes matter make them count text
-  gsap.from(".mintext span" , {
-        y :50,
-        duration:1,
-        stagger:0.3,
-        scrollTrigger : {
+ 
+
+  gsap.from(".mintext .min" , {
+    y : -30,
+    duration:5,
+    opacity:0,
+    stagger: 0.5,
+     scrollTrigger : {
           trigger:".mintext",
           scroller:"body",
           markers:true,
-          start: "top 65%",
+          start: "top 50%",
+          end : "top 80%"
         }
+  })
 
+    gsap.from(".mintext .count" , {
+    y : -30,
+    delay:1.5,
+    duration:5,
+    opacity:0,
+    stagger: 0.5,
+     scrollTrigger : {
+          trigger:".mintext",
+          scroller:"body",
+          markers:false,
+          start: "top 60%",
+          end : "top 80%"
+        }
   })
 
 
