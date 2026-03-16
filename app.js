@@ -283,19 +283,19 @@ const tl2 = gsap.timeline();
     y : -30,
     duration:5,
     opacity:0,
-    stagger: 0.5,
+    stagger: 0.2,
      scrollTrigger : {
           trigger:".mintext",
           scroller:"body",
           markers:false,
-          start: "top 50%",
-          end : "top 80%"
+          start: "top 40%",
+          end : "top 60%"
         }
   })
 
     gsap.from(".mintext .count" , {
     y : -30,
-    delay:1.5,
+    delay:1,
     duration:5,
     opacity:0,
     stagger: 0.5,
@@ -304,9 +304,27 @@ const tl2 = gsap.timeline();
           scroller:"body",
           markers:false,
           start: "top 60%",
-          end : "top 80%"
+          end: "top 40%",
+          scrub:0.3
         }
   })
+
+  
+    gsap.from(".mintext P" , {
+    y : -40,
+    duration:5,
+    opacity:0,
+    stagger: 0.2,
+     scrollTrigger : {
+          trigger:".mintext",
+          scroller:"body",
+          markers:false,
+          start: "top 55%",
+         
+           scrub:0.2
+        }
+  })
+
 
 
 
