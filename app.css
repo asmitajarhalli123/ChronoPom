@@ -925,7 +925,7 @@ height:70px;
 .footer{
   height: 100vh;
   width: 100%;
-  padding-top: 10%p;
+  padding-top: 10%;
   align-items: center;
   display: flex;
   justify-content: space-around;
@@ -933,8 +933,6 @@ height:70px;
   text-align: center;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   opacity: 30%;
-
-  
   font-weight: 300%;
   color: rgb(55, 50, 50);
 }
