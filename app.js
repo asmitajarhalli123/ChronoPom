@@ -481,7 +481,7 @@ templateUrl:"progress.html"
 })
 
 .otherwise({
-redirectTo:"/tasks"
+redirectTo:"/timer"
 });
 
 });
