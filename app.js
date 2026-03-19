@@ -598,6 +598,265 @@ $scope.closePopup = function () {
 
 
 
+
+// add on code logic for timer and task interconncetion 
+
+
+// ============================================================
+//  ADD-ON CODE — paste at the bottom of your existing app.js
+//  Do NOT change anything already in your app.js
+// ============================================================
+
+
+// ── 1. SHARED SERVICE (single source of truth) ───────────────
+//    Stores timer state + tasks so they survive route changes.
+
+app.service('AppService', function () {
+
+    var svc = this;
+
+    // Timer state — persists across navigation
+    svc.timerState = {
+        mode      : 'pomodoro',
+        totalTime : 1500,
+        timeLeft  : 1500,
+        running   : false,
+        minutes   : '25',
+        seconds   : '00',
+        dashOffset: 0,
+        sessions  : 0,
+        activeTaskIndex: -1
+    };
+
+    // Shared task list (same array used by tasks page & timer page)
+    svc.tasks = [];
+
+    // Stats
+    svc.stats = { dailyScore: 0, streak: 0 };
+
+    // Mode durations
+    svc.MODE_TIMES = { pomodoro: 1500, short: 300, long: 600 };
+
+    // Internal interval handle (stored here so it survives controller destroy)
+    svc._timerInterval  = null;
+    svc._gsapDone       = false;
+
+    svc.updateDisplay = function () {
+        var t = svc.timerState;
+        t.minutes   = ('0' + Math.floor(t.timeLeft / 60)).slice(-2);
+        t.seconds   = ('0' + (t.timeLeft % 60)).slice(-2);
+        t.dashOffset = 754 - (754 * (t.timeLeft / t.totalTime));
+    };
+
+    svc.completedCount = function () {
+        return svc.tasks.filter(function (t) { return t.completed; }).length;
+    };
+
+    svc.completionPct = function () {
+        return svc.tasks.length
+            ? Math.round(svc.completedCount() / svc.tasks.length * 100)
+            : 0;
+    };
+
+    svc.activeTask = function () {
+        var i = svc.timerState.activeTaskIndex;
+        return (i >= 0 && i < svc.tasks.length) ? svc.tasks[i] : null;
+    };
+
+    svc.updateDisplay(); // init display
+});
+
+
+// ── 2. TIMER CONTROLLER (replaces myctrl for timer.html) ─────
+//    Reads/writes AppService so state never resets on navigation.
+
+app.controller('TimerCtrl', ['$scope', '$interval', '$timeout', 'AppService',
+function ($scope, $interval, $timeout, AppService) {
+
+    // Expose service state directly on scope
+    $scope.t     = AppService.timerState;
+    $scope.tasks = AppService.tasks;
+    $scope.stats = AppService.stats;
+
+    // Internal tick — advances timer every second
+    function tick () {
+        var t = AppService.timerState;
+        if (t.timeLeft > 0) {
+            t.timeLeft--;
+            AppService.updateDisplay();
+
+            // Update active task's in-session progress bar
+            var active = AppService.activeTask();
+            if (active && t.mode === 'pomodoro') {
+                if (!active._secThisSession) active._secThisSession = 0;
+                active._secThisSession++;
+                active._progress = Math.round(active._secThisSession / t.totalTime * 100);
+            }
+        } else {
+            // Session finished
+            t.running = false;
+            $interval.cancel(AppService._timerInterval);
+            AppService._timerInterval = null;
+
+            if (t.mode === 'pomodoro') {
+                t.sessions++;
+                AppService.stats.dailyScore += 50;
+
+                var active = AppService.activeTask();
+                if (active) {
+                    active.done = Math.min((active.done || 0) + 1, active.pomodoros);
+                    active._secThisSession = 0;
+                    active._progress = Math.round(active.done / active.pomodoros * 100);
+                    if (active.done >= active.pomodoros) active.completed = true;
+                }
+            }
+
+            alert(t.mode === 'pomodoro'
+                ? '🍅 Pomodoro done! Take a break.'
+                : '⏰ Break over! Back to focus.');
+        }
+    }
+
+    // Controls
+    $scope.start = function () {
+        var t = AppService.timerState;
+        if (t.running) return;
+        t.running = true;
+
+        // Auto-select first incomplete task if none chosen
+        if (t.activeTaskIndex === -1) {
+            var idx = AppService.tasks.findIndex(function (tk) { return !tk.completed; });
+            if (idx >= 0) t.activeTaskIndex = idx;
+        }
+        AppService._timerInterval = $interval(tick, 1000);
+    };
+
+    $scope.pause = function () {
+        AppService.timerState.running = false;
+        if (AppService._timerInterval) {
+            $interval.cancel(AppService._timerInterval);
+            AppService._timerInterval = null;
+        }
+    };
+
+    $scope.reset = function () {
+        $scope.pause();
+        var t = AppService.timerState;
+        t.timeLeft = t.totalTime;
+        AppService.updateDisplay();
+    };
+
+    $scope.setMode = function (mode) {
+        $scope.pause();
+        var t       = AppService.timerState;
+        t.mode      = mode;
+        t.totalTime = AppService.MODE_TIMES[mode];
+        t.timeLeft  = t.totalTime;
+        AppService.updateDisplay();
+    };
+
+    // Active task selector
+    $scope.setActiveTask = function (index) {
+        AppService.timerState.activeTaskIndex = index;
+    };
+
+    $scope.isActive    = function (i) { return AppService.timerState.activeTaskIndex === i; };
+    $scope.activeTask  = function ()  { return AppService.activeTask(); };
+
+    // Stats helpers for template
+    $scope.completedCount = function () { return AppService.completedCount(); };
+    $scope.totalTasks     = function () { return AppService.tasks.length; };
+    $scope.completionPct  = function () { return AppService.completionPct(); };
+
+    // GSAP — run only once, guarded by flag
+    $timeout(function () {
+        if (window.gsap && !AppService._gsapDone) {
+            AppService._gsapDone = true;
+            try {
+                var tl = gsap.timeline();
+                if (document.querySelector('.lefthead h1')) {
+                    tl.from('.lefthead h1', { x: -50, duration: 1.2, opacity: 0 });
+                    tl.from('.righthead p', { x:  50, duration: 1.2, opacity: 0 }, '-=0.8');
+                    tl.from('.lefthead p',  { y:  20, duration: 1.0, opacity: 0 }, '-=0.6');
+                }
+                if (window.ScrollTrigger) {
+                    ScrollTrigger.refresh();
+                    if (document.querySelector('.keep'))
+                        gsap.from('.ks .keep', { y:50, opacity:0, duration:0.8, scrollTrigger:{ trigger:'.keep', scroller:'body', start:'top 70%' } });
+                    if (document.querySelector('.box'))
+                        gsap.from('.box', { y:50, opacity:0, duration:1, stagger:0.3, scrollTrigger:{ trigger:'.keep', scroller:'body', start:'top 60%' } });
+                    if (document.querySelector('.mintext')) {
+                        gsap.from('.mintext .min',   { y:-30, opacity:0, duration:1.5, scrollTrigger:{ trigger:'.mintext', scroller:'body', start:'top 60%' } });
+                        gsap.from('.mintext .count', { y:-30, opacity:0, duration:1.5, delay:0.4, scrollTrigger:{ trigger:'.mintext', scroller:'body', start:'top 60%' } });
+                        gsap.from('.mintext p',      { y:-40, opacity:0, duration:1.5, delay:0.8, scrollTrigger:{ trigger:'.mintext', scroller:'body', start:'top 55%' } });
+                    }
+                }
+            } catch(e) {}
+        }
+    }, 200);
+
+    // Don't cancel the interval when controller is destroyed —
+    // timer must keep running while user navigates to other pages
+    $scope.$on('$destroy', function () { /* intentionally empty */ });
+}]);
+
+
+// ── 3. TASK CONTROLLER (replaces myctrl for tasks.html) ──────
+
+app.controller('TaskCtrl', ['$scope', '$timeout', 'AppService',
+function ($scope, $timeout, AppService) {
+
+    $scope.tasks = AppService.tasks;    // same array as timer page
+    $scope.task  = { name:'', priority:'Medium', category:'Work', pomodoros:1 };
+    $scope.showNotification = false;
+    $scope.notificationMsg  = '';
+
+    $scope.addTask = function () {
+        if (!$scope.task.name || !$scope.task.name.trim()) return;
+        AppService.tasks.push({
+            name      : $scope.task.name.trim(),
+            priority  : $scope.task.priority  || 'Medium',
+            category  : $scope.task.category  || 'Work',
+            pomodoros : parseInt($scope.task.pomodoros) || 1,
+            done      : 0,
+            completed : false,
+            _progress : 0,
+            _secThisSession: 0
+        });
+        $scope.task = { name:'', priority:'Medium', category:'Work', pomodoros:1 };
+        $scope.notify('✅ Task added!');
+    };
+
+    $scope.deleteTask = function (index) {
+        var ai = AppService.timerState.activeTaskIndex;
+        if (ai === index)        AppService.timerState.activeTaskIndex = -1;
+        else if (ai > index)     AppService.timerState.activeTaskIndex--;
+        AppService.tasks.splice(index, 1);
+    };
+
+    $scope.setActive = function (index) {
+        AppService.timerState.activeTaskIndex = index;
+        $scope.notify('⏱ "' + AppService.tasks[index].name + '" is now active in timer!');
+    };
+
+    $scope.isActive  = function (i) { return AppService.timerState.activeTaskIndex === i; };
+    $scope.barWidth  = function (t) { return t.pomodoros ? Math.min(100, Math.round((t.done||0)/t.pomodoros*100)) : 0; };
+
+    $scope.pomodoroArray = function (task) {
+        var arr = [];
+        for (var i = 0; i < task.pomodoros; i++) arr.push({ filled: i < task.done });
+        return arr;
+    };
+
+    $scope.notify = function (msg) {
+        $scope.notificationMsg  = msg;
+        $scope.showNotification = true;
+        $timeout(function () { $scope.showNotification = false; }, 2500);
+    };
+}]);
+
+
+
 //Achievement Angularjs
 
 
