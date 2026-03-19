@@ -1,13 +1,17 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" ng-app="myapp">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ChronoPom - Productivity Tracker</title>
   <link rel="stylesheet" href="app.css">
-  
+  <link rel="stylesheet" href="analytics.css">
+  <link rel="stylesheet" href="TimertaskConnect.css">
   <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 
 <!-- Google Fonts: Montserrat & Inter -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,6 +42,7 @@
 
 
  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 </head>
 <body ng-controller="MainController">
@@ -76,6 +81,7 @@
         </div>
       </div>
     </div>
+  
 
     <div class="theme-card active" ng-click="unshow()"  ng-class="{'active': currentTheme == 'Soft Pastel Calm'}">
       <div class="theme-info"> 
@@ -116,7 +122,7 @@
       </div>                    
 
   <div ng-view></div>
-
+<script src="analytics.js"></script>
   
 </body>
 </html>
