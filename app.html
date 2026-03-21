@@ -1,4 +1,4 @@
-<!-- Main file -->
+<!-- Main file
 <!DOCTYPE html>
 <html lang="en" ng-app="myapp">
 <head>
@@ -13,18 +13,18 @@
   <link rel="stylesheet" href="TimertaskConnect.css">
 
   <!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --> 
 
   <!-- Chart.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script> -->
 
 <!-- Google Fonts: Montserrat & Inter -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<!-- <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"> -->
 
 <!-- Angular Chart.js Wrapper -->
-<script src="https://cdn.jsdelivr.net/npm/angular-chart.js/dist/angular-chart.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/angular-chart.js/dist/angular-chart.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/angular-chart.js/dist/angular-chart.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/gsap/dist/ScrollTrigger.min.js"></script>
@@ -71,7 +71,6 @@
       <div class="cont" ng-show="color">
     <h2 class="themetitle">Select Your Theme</h2>
 
-    <!-- Neon Focus -->
     <div class="theme-card" ng-click="unshow()" ng-class="{ 'active': currentTheme == 'Neon Focus'}">
       <div class="theme-info">
         <h3>Neon Focus</h3>
@@ -102,10 +101,10 @@
           <span style="background:#a8dadc"></span>
         </div>
       </div>
-    </div>
+    </div> 
 
     <!-- Glassmorphism -->
-    <div class="theme-card" ng-class="{'active': currentTheme == 'Glassmorphism'}" ng-click="unshow()">
+    <!-- <div class="theme-card" ng-class="{'active': currentTheme == 'Glassmorphism'}" ng-click="unshow()">
       <div class="theme-info">
         <h3>Glassmorphism</h3>
         <p>Blurred transparent cards with soft light effects</p>
@@ -130,5 +129,219 @@
  <script src="anConncetion.js"></script>
  <script  src="progress.js"></script>
 </body>
-</html>
+</html> -->
 
+
+
+
+
+
+
+<!-- Main file -->
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChronoPom - Productivity Tracker</title>
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="progress.css">
+  <link rel="stylesheet" href="analytics.css">
+  <link rel="stylesheet" href="TimertaskConnect.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.3/angular-route.min.js"></script>
+  <script src="app.js"></script>
+
+  <!-- ── Auth Guard ── -->
+  <script>
+    (function() {
+      try {
+        if (localStorage.getItem('cp_loggedIn') !== 'true') {
+          window.location.href = 'auth.html';
+        }
+      } catch(e) {}
+    })();
+  </script>
+
+  <!-- ── Plain JS logout function — works independent of Angular scope ── -->
+  <script>
+    function handleLogout() {
+      try {
+        localStorage.removeItem('cp_loggedIn');
+        localStorage.removeItem('cp_currentUser');
+      } catch(e) {}
+      window.location.href = 'auth.html?logout=1';
+    }
+  </script>
+
+  <style>
+    .nav-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: 6px;
+    }
+
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #48B3AF, #A7E399);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 800;
+      color: #000c31;
+      flex-shrink: 0;
+      font-family: 'Poppins', sans-serif;
+      border: 2px solid rgba(255,255,255,0.25);
+    }
+
+    .user-name-text {
+      font-size: 13px;
+      font-weight: 500;
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      max-width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Logout button uses plain onclick — 100% reliable */
+    .logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(220,38,38,0.15);
+      border: 1.5px solid rgba(220,38,38,0.4);
+      color: #ff8a8a;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .logout-btn:hover {
+      background: rgba(220,38,38,0.35);
+      border-color: #dc2626;
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+    .logout-btn i {
+      font-size: 12px;
+      padding: 0 !important;
+      color: inherit !important;
+    }
+  </style>
+</head>
+
+<body ng-controller="MainController">
+
+  <div class="navigation">
+    <div class="image left"></div>
+
+    <div class="right">
+
+      <i class="fa-solid fa-clock"></i>
+      <!-- FIXED: removed ng-controller="myctrl" from here — it was causing scope conflict -->
+      <a href="#!/timer"     ng-class="{'active': currentRoute=='/timer'}">TIMER</a>
+      <i class="fa-solid fa-list-check"></i>
+      <a href="#!/tasks"     ng-class="{'active': currentRoute=='/tasks'}">TASKS</a>
+      <i class="fa-solid fa-chart-line"></i>
+      <a href="#!/analytics" ng-class="{'active': currentRoute=='/analytics'}">ANALYTICS</a>
+      <i class="fa-solid fa-bars-progress"></i>
+      <a href="#!/progress"  ng-class="{'active': currentRoute=='/progress'}">PROGRESS</a>
+
+      <!-- Theme Picker -->
+      <div class="colorbox">
+        <div class="color" ng-click="changeColor()">
+          <i class="fa-solid fa-palette"></i>
+        </div>
+        <div class="cont" ng-show="color">
+          <h2 class="themetitle">Select Your Theme</h2>
+          <div class="theme-card" ng-click="unshow()" ng-class="{'active': currentTheme=='Neon Focus'}">
+            <div class="theme-info">
+              <h3>Neon Focus</h3>
+              <p>Dark background with glowing accents</p>
+              <div class="colors">
+                <span style="background:#0b1020"></span>
+                <span style="background:#e6f0ff"></span>
+                <span style="background:#00d4ff"></span>
+                <span style="background:#060b1a"></span>
+                <span style="background:#ff007a"></span>
+              </div>
+            </div>
+          </div>
+          <div class="theme-card active" ng-click="unshow()" ng-class="{'active': currentTheme=='Soft Pastel Calm'}">
+            <div class="theme-info">
+              <div class="header-row"><h3>Soft Pastel Calm</h3></div>
+              <p>Light colors with rounded elements</p>
+              <div class="colors">
+                <span style="background:#f8f5f0"></span>
+                <span style="background:#5a5148"></span>
+                <span style="background:#b8b2e6"></span>
+                <span style="background:#ffffff"></span>
+                <span style="background:#a8dadc"></span>
+              </div>
+            </div>
+          </div>
+          <div class="theme-card" ng-class="{'active': currentTheme=='Glassmorphism'}" ng-click="unshow()">
+            <div class="theme-info">
+              <h3>Glassmorphism</h3>
+              <p>Blurred transparent cards</p>
+              <div class="colors">
+                <span style="background:#0f172a"></span>
+                <span style="background:#e5e7eb"></span>
+                <span style="background:#4f6df5"></span>
+                <span style="background:#f1f5f9"></span>
+                <span style="background:#7c5cff"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── USER + LOGOUT ── -->
+      <div class="nav-user">
+        <div class="user-avatar">{{ userInitial() }}</div>
+        <span class="user-name-text">{{ currentUser.name }}</span>
+
+        <!--
+          KEY FIX: using plain HTML onclick="handleLogout()"
+          instead of ng-click="logout()" so it NEVER gets blocked
+          by any Angular scope issue or child controller conflict
+        -->
+        <button class="logout-btn" type="button" onclick="handleLogout()">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div ng-view></div>
+
+  <script src="analytics.js"></script>
+  <script src="anConncetion.js"></script>
+  <script src="progress.js"></script>
+</body>
+</html>
