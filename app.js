@@ -1,4 +1,4 @@
-
+//App.CSS file
 // Initialize the app with ngRoute dependency
 var app = angular.module('myapp',['ngRoute']);
 
@@ -424,6 +424,7 @@ app.controller("MainController", function($scope, $timeout) {
     //         unlocked: false
     //     }
     // ];
+<<<<<<< HEAD
 
     // $scope.showPopup = false;
     // $scope.selected = {};
@@ -554,6 +555,138 @@ app.controller("MainController", function($scope, $timeout) {
 
 
 
+=======
+
+    // $scope.showPopup = false;
+    // $scope.selected = {};
+
+    // $scope.openPopup = function(badge) {
+    //     if (badge.unlocked) {
+    //         $scope.selected = badge;
+    //         $scope.showPopup = true;
+    //     }
+    // };
+
+    // $scope.closePopup = function() {
+    //     $scope.showPopup = false;
+    // };
+
+
+// ===== ACHIEVEMENT SYSTEM =====
+
+$scope.stats = {
+    sessions: 0,
+    breaks: 0,
+    early: 0,
+    night: 0
+};
+
+$scope.badges = [
+    {
+        name: "🚀 Lift Off",
+        desc: "Complete first session",
+        unlocked: false,
+        condition: () => $scope.stats.sessions >= 1
+    },
+    {
+        name: "🔥 3 Day Streak",
+        desc: "Complete 3 sessions",
+        unlocked: false,
+        condition: () => $scope.stats.sessions >= 3
+    },
+    {
+        name: "⚡ Focus Master",
+        desc: "Complete 5 sessions",
+        unlocked: false,
+        condition: () => $scope.stats.sessions >= 5
+    },
+    {
+        name: "🌅 Early Bird",
+        desc: "Work before 8AM",
+        unlocked: false,
+        condition: () => $scope.stats.early >= 1
+    },
+    {
+        name: "🌙 Night Owl",
+        desc: "Work after 11PM",
+        unlocked: false,
+        condition: () => $scope.stats.night >= 1
+    },
+    {
+        name: "☕ Break Lover",
+        desc: "Take 3 breaks",
+        unlocked: false,
+        condition: () => $scope.stats.breaks >= 3
+    }
+];
+
+$scope.showPopup = false;
+$scope.selected = {};
+
+function checkBadges() {
+    $scope.badges.forEach(b => {
+        if (!b.unlocked && b.condition()) {
+            b.unlocked = true;
+
+            $scope.selected = b;
+            $scope.showPopup = true;
+
+            setTimeout(() => {
+                $scope.showPopup = false;
+                $scope.$apply();
+            }, 2000);
+        }
+    });
+}
+
+// CALL THIS WHEN TIMER FINISHES
+$scope.completeSession = function () {
+    $scope.stats.sessions++;
+
+    let hour = new Date().getHours();
+    if (hour < 8) $scope.stats.early++;
+    if (hour >= 23) $scope.stats.night++;
+
+    checkBadges();
+};
+
+// CALL THIS WHEN BREAK TAKEN
+$scope.takeBreak = function () {
+    $scope.stats.breaks++;
+    checkBadges();
+};
+
+$scope.openPopup = function (badge) {
+    if (badge.unlocked) {
+        $scope.selected = badge;
+        $scope.showPopup = true;
+    }
+};
+
+$scope.closePopup = function () {
+    $scope.showPopup = false;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 50b6a87f30ef3e2cb16bb0d0a18eaa1010b43a20
 
 
   
@@ -867,7 +1000,11 @@ function ($scope, $timeout, AppService) {
 //  Fully integrated: Timer + Tasks + Progress/Badges
 // =====================================================
 
+<<<<<<< HEAD
 
+=======
+// var app = angular.module('myapp', ['ngRoute']);
+>>>>>>> 50b6a87f30ef3e2cb16bb0d0a18eaa1010b43a20
 
 // ─────────────────────────────────────────────
 //  ROUTES
@@ -885,6 +1022,7 @@ function ($scope, $timeout, AppService) {
 //  SHARED STATE SERVICE
 //  Single source of truth for all stats
 // ─────────────────────────────────────────────
+<<<<<<< HEAD
 app.factory('AppState', function () {
   var state = {
     // Timer stats
@@ -924,6 +1062,47 @@ app.factory('AppState', function () {
 // ─────────────────────────────────────────────
 //  MAIN CONTROLLER  (navigation + theme)
 // ─────────────────────────────────────────────
+=======
+// app.factory('AppState', function () {
+//   var state = {
+//     // Timer stats
+//     sessions:       0,
+//     breaks:         0,
+//     pomodorosToday: 0,
+//     totalMinutes:   0,
+
+//     // Task stats
+//     tasks:          [],
+//     completedTasks: 0,
+//     highPriorityDone: 0,
+//     workTasksDone:  0,
+
+//     // Time-based
+//     earlyBird:  0,   // sessions before 8am
+//     nightOwl:   0,   // sessions after 11pm
+//     lunchFocus: 0,   // sessions 12pm-2pm
+
+//     // Consistency
+//     weekSessions:   [0, 0, 0, 0, 0, 0, 0],  // Mon–Sun
+//     dailyStreak:    0,
+
+//     // Activity log
+//     activityLog: [],
+
+//     // Callbacks list (for cross-controller reactivity)
+//     _listeners: [],
+//     subscribe: function (fn) { this._listeners.push(fn); },
+//     notify: function () {
+//       this._listeners.forEach(function (fn) { try { fn(); } catch(e){} });
+//     }
+//   };
+//   return state;
+// });
+
+// // ─────────────────────────────────────────────
+// //  MAIN CONTROLLER  (navigation + theme)
+// // ─────────────────────────────────────────────
+>>>>>>> 50b6a87f30ef3e2cb16bb0d0a18eaa1010b43a20
 // app.controller('MainController', ['$scope', '$location', '$timeout', '$interval', 'AppState',
 //   function ($scope, $location, $timeout, $interval, AppState) {
 

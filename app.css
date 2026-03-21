@@ -1,3 +1,4 @@
+/* app.css file */
 .body{
     margin: 0;
     padding: 0;
@@ -124,15 +125,18 @@ ng-view {
 }
 
 .container1{
-    width: 100%;
+    width: 90%;
     height: 70%;
     align-items: center;
     display: flex;
     justify-content: space-around;
     padding-top: 4%;
+    margin-left: 4.6%;
+  
 }
 
 .box{
+    margin-right:10px ;
     height: 30%;
     width: 20%;
     align-items: center;
@@ -150,7 +154,7 @@ ng-view {
 
 .box:hover{
      transform: rotate(10deg);
-     border-bottom: 10px solid #000c31;
+     border-left: 10px solid #4c67b5;
      /* transform: scale(1.1); */
       
 }
