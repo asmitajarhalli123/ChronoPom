@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!--
+  FILE: index.html
+  PURPOSE: App shell — bootstraps AngularJS, loads all CSS/JS,
+           renders the top navigation bar, and hosts the
+           <div ng-view> outlet where route templates are injected.
+  CONTROLLER: MainController (app/app.controller.js)
+-->
+<html lang="en" ng-app="chronopom">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChronoPom - Productivity Tracker</title>
+
+  <!-- ═══════════════════════════════════════════════════════
+       STYLESHEETS
+       Each CSS file is scoped to its own feature/page.
+       ═══════════════════════════════════════════════════════ -->
+  <link rel="stylesheet" href="assets/css/app.css">               <!-- Global layout, navigation, body -->
+  <link rel="stylesheet" href="assets/css/analytics.css">         <!-- Analytics page cards, charts, heatmap -->
+  <link rel="stylesheet" href="assets/css/progress.css">          <!-- Progress page badges, modal, awards -->
+  <link rel="stylesheet" href="assets/css/tasks.css">             <!-- Tasks page task cards, form -->
+  <link rel="stylesheet" href="assets/css/timer.css">             <!-- Timer page (currently empty — extend here) -->
+  <link rel="stylesheet" href="assets/css/TimertaskConnect.css">  <!-- Shared: timer controls, task-card upgrades, toast -->
+
+  <!-- ═══════════════════════════════════════════════════════
+       GOOGLE FONTS
+       ═══════════════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- ═══════════════════════════════════════════════════════
+       ICON FONT
+       Used throughout navigation and task cards.
+       ═══════════════════════════════════════════════════════ -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- ═══════════════════════════════════════════════════════
+       VENDOR JAVASCRIPT (CDN)
+       Load order matters: Chart.js and GSAP before Angular,
+       Angular before angular-route, angular-route before app code.
+       ═══════════════════════════════════════════════════════ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>         <!-- Used by: AnalyticsCtrl (4 charts) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>             <!-- Used by: TimerCtrl (entrance animations) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>    <!-- Used by: TimerCtrl (scroll-triggered animations) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>     <!-- Core AngularJS framework -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.3/angular-route.min.js"></script> <!-- ngRoute for #!/ routing -->
+
+  <!-- ═══════════════════════════════════════════════════════
+       AUTH GUARD
+       Runs before Angular boots. Redirects to the login page
+       if the user has not authenticated in this browser.
+       Writes cp_loggedIn='true' to localStorage on login.
+       ═══════════════════════════════════════════════════════ -->
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem('cp_loggedIn') !== 'true') {
+          window.location.href = 'app/auth/auth.html';
+        }
+      } catch (e) { /* localStorage blocked — allow through */ }
+    })();
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NAV BAR INLINE STYLES
+       Kept here (not in app.css) because they are tightly
+       coupled to the HTML structure below.
+       ═══════════════════════════════════════════════════════ -->
+  <style>
+    /* User avatar + name + logout wrapper in the nav */
+    .nav-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: 6px;
+    }
+
+    /* Coloured circle showing the first letter of the user's name */
+    .user-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #48B3AF, #A7E399);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 800; color: #000c31;
+      flex-shrink: 0;
+      font-family: 'Poppins', sans-serif;
+      border: 2px solid rgba(255,255,255,0.25);
+    }
+
+    /* Username text beside the avatar */
+    .user-name-text {
+      font-size: 13px; font-weight: 500; color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      max-width: 100px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+
+    /* Red-tinted logout button in the nav */
+    .logout-btn {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(220,38,38,0.15);
+      border: 1.5px solid rgba(220,38,38,0.4);
+      color: #ff8a8a;
+      font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 600;
+      padding: 7px 14px; border-radius: 20px;
+      cursor: pointer; transition: all 0.2s; text-decoration: none;
+    }
+    .logout-btn:hover {
+      background: rgba(220,38,38,0.35);
+      border-color: #dc2626; color: #ffffff;
+      transform: translateY(-1px);
+    }
+    .logout-btn i { font-size: 12px; padding: 0 !important; color: inherit !important; }
+  </style>
+</head>
+
+<!-- ════════════════════════════════════════════════════════════
+     BODY — MainController wraps the entire page shell.
+     Child routes (timer/tasks/analytics/progress) inject their
+     own controllers inside <div ng-view>.
+     ════════════════════════════════════════════════════════════ -->
+<body ng-controller="MainController">
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOP NAVIGATION BAR
+       Fixed header shared across all pages/routes.
+       - Left: logo image
+       - Right: nav links, theme picker, user info, logout
+       ═══════════════════════════════════════════════════════ -->
+  <div class="navigation">
+
+    <!-- Logo (left side) -->
+    <div class="image left">
+      <img src="assets/images/logo2.png" alt="ChronoPom Logo"
+           style="height:60px; margin-left:18px;">
+    </div>
+
+    <!-- Right-side nav items -->
+    <div class="right">
+
+      <!-- Timer nav link -->
+      <i class="fa-solid fa-clock"></i>
+      <a href="#!/timer"     ng-class="{'active': currentRoute=='/timer'}">TIMER</a>
+
+      <!-- Tasks nav link -->
+      <i class="fa-solid fa-list-check"></i>
+      <a href="#!/tasks"     ng-class="{'active': currentRoute=='/tasks'}">TASKS</a>
+
+      <!-- Analytics nav link -->
+      <i class="fa-solid fa-chart-line"></i>
+      <a href="#!/analytics" ng-class="{'active': currentRoute=='/analytics'}">ANALYTICS</a>
+
+      <!-- Progress nav link -->
+      <i class="fa-solid fa-bars-progress"></i>
+      <a href="#!/progress"  ng-class="{'active': currentRoute=='/progress'}">PROGRESS</a>       
+        
+
+      <!-- ─────────────────────────────────────────────────
+           USER INFO + LOGOUT
+           Avatar initial and name from MainController.currentUser
+           (read from localStorage key cp_currentUser).
+           Logout uses plain onclick="handleLogout()" to avoid
+           Angular scope nesting issues.
+           ───────────────────────────────────────────────── -->
+      <div class="nav-user">
+        <div class="user-avatar">{{ userInitial() }}</div>
+        <span class="user-name-text">{{ currentUser.name }}</span>
+        <button class="logout-btn" type="button" onclick="handleLogout()">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+      </div>
+
+    </div><!-- /right -->
+  </div><!-- /navigation -->
+
+  <!-- ═══════════════════════════════════════════════════════
+       ROUTER OUTLET
+       Angular injects the matched route template here.
+       Each template brings its own ng-controller.
+       ═══════════════════════════════════════════════════════ -->
+  <div ng-view></div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       APP SCRIPTS
+       Load order is critical:
+         1. app.module.js      — creates the 'chronopom' module
+         2. app.service.js     — registers AppService (singleton)
+         3. app.controller.js  — registers MainController
+         4. Feature controllers (depend on AppService)
+       ═══════════════════════════════════════════════════════ -->
+  <script src="app/app.module.js"></script>                              <!-- Module declaration + routes -->
+  <script src="shared/services/app.service.js"></script>                 <!-- Shared singleton: timer, tasks, stats -->
+  <script src="app/app.controller.js"></script>                          <!-- MainController: nav, theme, user -->
+  <script src="app/timer/timer.controller.js"></script>                  <!-- TimerCtrl: countdown, task link, GSAP -->
+  <script src="app/tasks/tasks.controller.js"></script>                  <!-- TaskCtrl: add/delete/focus tasks -->
+  <script src="app/analytics/analytics.controller.js"></script>          <!-- AnalyticsCtrl: Chart.js charts, heatmap -->
+  <script src="app/progress/progress.controller.js"></script>            <!-- ProgressCtrl: badges, XP, awards -->
+
+</body>
+</html>
