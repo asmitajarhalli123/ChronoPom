@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="authApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChronoPom – Sign In</title>
+
+  <!-- ── Firebase SDK (compat mode) ── -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <!-- ── Initialize Firebase ── -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDumahvfc57fJw0lgoq6vf532GGr4EAI74",
+      authDomain: "chronopom.firebaseapp.com",
+      projectId: "chronopom",
+      storageBucket: "chronopom.firebasestorage.app",
+      messagingSenderId: "153816023877",
+      appId: "1:153816023877:web:0b32bb727141b1a75a742c"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db   = firebase.firestore();
+    const auth = firebase.auth();
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;background:#030b1a;font-family:'Poppins',sans-serif;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.bg-orb{position:fixed;border-radius:50%;filter:blur(100px);opacity:.28;z-index:0;pointer-events:none;animation:orbFloat 10s ease-in-out infinite alternate}
+.orb1{width:520px;height:520px;background:#48B3AF;top:-200px;left:-160px;animation-duration:11s}
+.orb2{width:420px;height:420px;background:#A7E399;bottom:-160px;right:-120px;animation-duration:9s;animation-delay:2s}
+.orb3{width:260px;height:260px;background:#F6FF99;top:45%;left:45%;opacity:.1;animation-duration:13s}
+@keyframes orbFloat{from{transform:translateY(0) scale(1)}to{transform:translateY(36px) scale(1.1)}}
+.particle{position:fixed;font-size:20px;opacity:.1;z-index:0;top:110%;pointer-events:none;animation:floatUp linear infinite}
+@keyframes floatUp{0%{top:110%;opacity:0}10%{opacity:.13}90%{opacity:.13}100%{top:-5%;opacity:0}}
+.auth-wrapper{position:relative;z-index:10;display:flex;width:min(960px,95vw);min-height:580px;border-radius:28px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.06);animation:cardIn .65s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes cardIn{from{transform:scale(.9) translateY(24px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+.left-panel{flex:0 0 42%;background:linear-gradient(150deg,#000c31 0%,#052040 55%,#003d3a 100%);padding:48px 38px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.left-panel::before{content:'';position:absolute;top:-80px;right:-80px;width:240px;height:240px;border-radius:50%;background:rgba(72,179,175,.1);pointer-events:none}
+.left-panel::after{content:'';position:absolute;bottom:-60px;left:-60px;width:180px;height:180px;border-radius:50%;background:rgba(167,227,153,.08);pointer-events:none}
+.brand{margin-bottom:36px}
+.brand-icon{font-size:38px;display:inline-block;animation:rotateSlow 8s linear infinite}
+@keyframes rotateSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.brand-name{font-family:'Playfair Display',serif;font-size:34px;color:#fff;letter-spacing:-1px;margin:8px 0 4px;line-height:1}
+.brand-name span{color:#48B3AF}
+.brand-tagline{font-size:12px;color:rgba(255,255,255,.4);letter-spacing:.06em}
+.left-features{display:flex;flex-direction:column;gap:16px;flex:1;justify-content:center}
+.feature-item{display:flex;align-items:center;gap:14px;opacity:0;animation:slideInLeft .5s forwards}
+.feature-item:nth-child(1){animation-delay:.2s}.feature-item:nth-child(2){animation-delay:.35s}.feature-item:nth-child(3){animation-delay:.5s}.feature-item:nth-child(4){animation-delay:.65s}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+.feature-icon{font-size:20px;width:42px;height:42px;background:rgba(72,179,175,.12);border:1px solid rgba(72,179,175,.22);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.feature-item strong{display:block;font-size:13px;font-weight:600;color:#fff;line-height:1.3}
+.feature-item p{font-size:11px;color:rgba(255,255,255,.4);margin:0}
+.left-quote{font-size:11px;color:rgba(255,255,255,.28);font-style:italic;line-height:1.7;border-top:1px solid rgba(255,255,255,.07);padding-top:16px;margin-top:20px}
+.right-panel{flex:1;background:#f9fafb;padding:40px 44px;display:flex;flex-direction:column;overflow-y:auto}
+.tab-row{display:flex;background:#ebebeb;border-radius:14px;padding:4px;margin-bottom:28px;gap:4px}
+.tab-btn{flex:1;padding:9px 12px;border:none;border-radius:11px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:500;cursor:pointer;background:transparent;color:#9ca3af;transition:all .22s}
+.tab-active{background:#fff;color:#000c31;font-weight:700;box-shadow:0 2px 12px rgba(0,0,0,.1)}
+.form-box{flex:1;animation:formFadeIn .3s ease both}
+@keyframes formFadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.form-title{font-size:22px;font-weight:700;color:#000c31;margin-bottom:4px}
+.form-sub{font-size:12px;color:#9ca3af;margin-bottom:22px;line-height:1.5}
+.input-group{margin-bottom:15px}
+.input-group label{display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:6px}
+.input-wrap{display:flex;align-items:center;background:#fff;border:1.5px solid #e5e7eb;border-radius:12px;padding:0 14px;gap:10px;transition:border-color .2s,box-shadow .2s}
+.input-wrap:focus-within{border-color:#48B3AF;box-shadow:0 0 0 3px rgba(72,179,175,.15)}
+.input-wrap > i{color:#c4c4c4;font-size:14px;flex-shrink:0}
+.input-wrap input{flex:1;border:none;outline:none;font-family:'Poppins',sans-serif;font-size:13px;color:#1a1a2e;padding:12px 0;background:transparent}
+.input-wrap input::placeholder{color:#c4c4c4}
+.eye-btn{cursor:pointer;color:#c4c4c4 !important;transition:color .2s;font-size:14px}
+.eye-btn:hover{color:#48B3AF !important}
+.match-icon{color:#16a34a !important;font-size:14px}
+.strength-bar{height:4px;background:#f3f4f6;border-radius:4px;margin-top:8px;overflow:hidden}
+.strength-fill{height:100%;border-radius:4px;transition:width .4s,background .3s}
+.strength-label{font-size:11px;color:#9ca3af;display:block;margin-top:4px}
+.form-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+.remember-label{display:flex;align-items:center;gap:6px;font-size:12px;color:#6b7280;cursor:pointer}
+.forgot-link{font-size:12px;color:#48B3AF;cursor:pointer;font-weight:500;text-decoration:none}
+.forgot-link:hover{color:#000c31;text-decoration:underline}
+.error-msg{font-size:12px;color:#b91c1c;background:#fee2e2;border-left:3px solid #dc2626;border-radius:8px;padding:9px 14px;margin-bottom:12px;display:flex;align-items:center;gap:7px}
+.success-msg{font-size:12px;color:#166534;background:#dcfce7;border-left:3px solid #16a34a;border-radius:8px;padding:9px 14px;margin-bottom:12px;display:flex;align-items:center;gap:7px}
+.submit-btn{width:100%;padding:13px;background:linear-gradient(135deg,#000c31 0%,#003d3a 100%);color:#fff;border:none;border-radius:14px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:transform .15s,box-shadow .2s,opacity .2s;box-shadow:0 4px 20px rgba(0,12,49,.3);letter-spacing:.01em}
+.submit-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,12,49,.42)}
+.submit-btn:active:not(:disabled){transform:scale(.98)}
+.submit-btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+a.submit-btn{display:block;text-align:center;text-decoration:none;margin-top:20px}
+.divider{display:flex;align-items:center;gap:12px;margin:18px 0 14px;font-size:11px;color:#9ca3af}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:#e5e7eb}
+.terms-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:16px;font-size:12px;color:#6b7280;line-height:1.5}
+.terms-row input{margin-top:2px;flex-shrink:0}
+.terms-row a{color:#48B3AF;text-decoration:none}
+.terms-row a:hover{text-decoration:underline}
+.back-btn{background:none;border:none;font-family:'Poppins',sans-serif;font-size:13px;color:#6b7280;cursor:pointer;margin-bottom:18px;display:inline-flex;align-items:center;gap:6px;padding:0;transition:color .2s}
+.back-btn:hover{color:#000c31}
+.success-box{text-align:center;padding-top:32px}
+.success-emoji{font-size:60px;display:block;animation:bounceIn .7s ease 3}
+@keyframes bounceIn{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@media(max-width:700px){
+  .auth-wrapper{flex-direction:column;border-radius:20px;min-height:auto}
+  .left-panel{flex:none;padding:22px 22px 18px;flex-direction:row;align-items:center;gap:14px}
+  .left-features,.left-quote{display:none}
+  .brand{margin-bottom:0}
+  .right-panel{padding:24px 20px 32px}
+}
+</style>
+</head>
+<body ng-controller="AuthCtrl">
+
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+  <div class="bg-orb orb3"></div>
+  <div class="particle" style="left:8%;animation-duration:7s;animation-delay:0s">🍅</div>
+  <div class="particle" style="left:20%;animation-duration:9s;animation-delay:2s">⏱</div>
+  <div class="particle" style="left:65%;animation-duration:6s;animation-delay:1s">✅</div>
+  <div class="particle" style="left:82%;animation-duration:8s;animation-delay:3s">🎯</div>
+  <div class="particle" style="left:45%;animation-duration:10s;animation-delay:4s">🍅</div>
+
+  <div class="auth-wrapper">
+
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+      <div class="brand">
+        <div class="brand-icon">⏱</div>
+        <h1 class="brand-name">Chrono<span>Pom</span></h1>
+        <p class="brand-tagline">Make Time Work for You.</p>
+      </div>
+      <div class="left-features">
+        <div class="feature-item"><span class="feature-icon">🍅</span><div><strong>Pomodoro Timer</strong><p>Structured focus sessions</p></div></div>
+        <div class="feature-item"><span class="feature-icon">📋</span><div><strong>Task Manager</strong><p>Track every goal you set</p></div></div>
+        <div class="feature-item"><span class="feature-icon">📈</span><div><strong>Analytics</strong><p>Insights to boost progress</p></div></div>
+        <div class="feature-item"><span class="feature-icon">🏆</span><div><strong>Achievements</strong><p>Earn badges as you grow</p></div></div>
+      </div>
+      <p class="left-quote">"Success is the sum of small efforts, repeated day in and day out."</p>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+
+      <!-- Tabs -->
+      <div class="tab-row" ng-show="isLoginOrRegister()">
+        <button class="tab-btn" ng-class="{'tab-active': view==='login'}"    ng-click="switchView('login')">Sign In</button>
+        <button class="tab-btn" ng-class="{'tab-active': view==='register'}" ng-click="switchView('register')">Register</button>
+      </div>
+
+      <!-- ══ LOGIN ══ -->
+      <div ng-show="view==='login'" class="form-box">
+        <h2 class="form-title">Welcome back 👋</h2>
+        <p class="form-sub">Sign in to continue your sessions</p>
+
+        <div class="input-group">
+          <label>Email</label>
+          <div class="input-wrap">
+            <i class="fa-regular fa-envelope"></i>
+            <input type="email" ng-model="user.email" placeholder="you@example.com">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-lock"></i>
+            <input type="{{ showPass ? 'text' : 'password' }}" ng-model="user.password" placeholder="Your password">
+            <i class="eye-btn" ng-class="showPass ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"
+               ng-click="showPass = !showPass"></i>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="remember-label">
+            <input type="checkbox" ng-model="user.remember"> Remember me
+          </label>
+          <a class="forgot-link" ng-click="switchView('forgot')">Forgot password?</a>
+        </div>
+
+        <div class="error-msg" ng-show="loginError">
+          <i class="fa-solid fa-circle-exclamation"></i> {{ loginError }}
+        </div>
+
+        <button class="submit-btn" type="button" ng-click="login()" ng-disabled="loading">
+          <span ng-hide="loading">Sign In &nbsp;<i class="fa-solid fa-arrow-right"></i></span>
+          <span ng-show="loading"><i class="fa-solid fa-circle-notch fa-spin"></i> Signing in…</span>
+        </button>
+      </div>
+
+      <!-- ══ REGISTER ══ -->
+      <div ng-show="view==='register'" class="form-box">
+        <h2 class="form-title">Create account ✨</h2>
+        <p class="form-sub">Join ChronoPom and start your focus journey</p>
+
+        <div class="input-group">
+          <label>Full name</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" ng-model="reg.name" placeholder="Your name">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Email</label>
+          <div class="input-wrap">
+            <i class="fa-regular fa-envelope"></i>
+            <input type="email" ng-model="reg.email" placeholder="you@example.com">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-lock"></i>
+            <input type="{{ showRegPass ? 'text' : 'password' }}" ng-model="reg.password" placeholder="Min. 8 characters">
+            <i class="eye-btn" ng-class="showRegPass ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"
+               ng-click="showRegPass = !showRegPass"></i>
+          </div>
+          <div class="strength-bar" ng-show="showStrengthBar()">
+            <div class="strength-fill" ng-style="{width: passStrength()+'%', background: passColor()}"></div>
+          </div>
+          <span class="strength-label" ng-show="showStrengthBar()">{{ passLabel() }}</span>
+        </div>
+
+        <div class="input-group">
+          <label>Confirm password</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" ng-model="reg.confirm" placeholder="Repeat password">
+            <i class="match-icon fa-solid fa-check-circle" ng-show="passwordsMatch()"></i>
+          </div>
+        </div>
+
+        <div class="terms-row">
+          <input type="checkbox" ng-model="reg.terms">
+          <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
+        </div>
+
+        <div class="error-msg" ng-show="regError">
+          <i class="fa-solid fa-circle-exclamation"></i> {{ regError }}
+        </div>
+
+        <button class="submit-btn" type="button" ng-click="register()" ng-disabled="loading">
+          <span ng-hide="loading">Create Account &nbsp;<i class="fa-solid fa-arrow-right"></i></span>
+          <span ng-show="loading"><i class="fa-solid fa-circle-notch fa-spin"></i> Creating account…</span>
+        </button>
+      </div>
+
+      <!-- ══ FORGOT PASSWORD ══ -->
+      <div ng-show="view==='forgot'" class="form-box">
+        <button class="back-btn" type="button" ng-click="switchView('login')">
+          <i class="fa-solid fa-arrow-left"></i> Back to Sign In
+        </button>
+        <h2 class="form-title">Reset Password 🔑</h2>
+        <p class="form-sub">Enter your email — we'll send a reset link</p>
+        <div class="input-group">
+          <label>Email address</label>
+          <div class="input-wrap">
+            <i class="fa-regular fa-envelope"></i>
+            <input type="email" ng-model="forgot.email" placeholder="you@example.com">
+          </div>
+        </div>
+        <div class="success-msg" ng-show="resetSent">
+          <i class="fa-solid fa-check-circle"></i> Reset link sent! Check your inbox.
+        </div>
+        <button class="submit-btn" type="button" ng-click="sendReset()" ng-disabled="loading">
+          <span ng-hide="loading">Send Reset Link &nbsp;<i class="fa-solid fa-paper-plane"></i></span>
+          <span ng-show="loading"><i class="fa-solid fa-circle-notch fa-spin"></i> Sending…</span>
+        </button>
+      </div>
+
+      <!-- ══ SUCCESS ══ -->
+      <div ng-show="view==='success'" class="form-box success-box">
+        <div class="success-emoji">🎉</div>
+        <h2 class="form-title">You're in!</h2>
+        <p class="form-sub">Welcome to ChronoPom, <strong>{{loggedInName}}</strong>.<br>Let's build your focus habit.</p>
+        <a href="app.html" class="submit-btn">Go to Dashboard &nbsp;<i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+    </div><!-- /right-panel -->
+  </div><!-- /auth-wrapper -->
+
+<script>
+var authApp = angular.module('authApp', []);
+
+authApp.controller('AuthCtrl', ['$scope', '$timeout', function($scope, $timeout) {
+
+  // ── State ──
+  $scope.view         = 'login';
+  $scope.loading      = false;
+  $scope.loginError   = '';
+  $scope.regError     = '';
+  $scope.resetSent    = false;
+  $scope.showPass     = false;
+  $scope.showRegPass  = false;
+  $scope.loggedInName = '';
+
+  $scope.user   = { email: '', password: '', remember: false };
+  $scope.reg    = { name: '', email: '', password: '', confirm: '', terms: false };
+  $scope.forgot = { email: '' };
+
+  // ── Auto-redirect if already logged in ──
+  try {
+    var isLoggedIn = localStorage.getItem('cp_loggedIn') === 'true';
+    var fromLogout = window.location.href.indexOf('logout=1') !== -1;
+    if (isLoggedIn && !fromLogout) {
+      window.location.href = 'app.html';
+    }
+  } catch(e) {}
+
+  // ── View helpers ──
+  $scope.isLoginOrRegister = function() {
+    return $scope.view === 'login' || $scope.view === 'register';
+  };
+
+  $scope.showStrengthBar = function() {
+    return $scope.reg.password && $scope.reg.password.length > 0;
+  };
+
+  $scope.passwordsMatch = function() {
+    return $scope.reg.password &&
+           $scope.reg.confirm &&
+           $scope.reg.password === $scope.reg.confirm;
+  };
+
+  $scope.switchView = function(v) {
+    $scope.loginError = '';
+    $scope.regError   = '';
+    $scope.resetSent  = false;
+    $scope.loading    = false;
+    $scope.view = v;
+  };
+
+  // ── LOGIN — Firebase Auth ──
+  $scope.login = function() {
+    $scope.loginError = '';
+    if (!$scope.user.email || !$scope.user.password) {
+      $scope.loginError = 'Please fill in all fields.'; return;
+    }
+    if (!validEmail($scope.user.email)) {
+      $scope.loginError = 'Please enter a valid email address.'; return;
+    }
+    $scope.loading = true;
+
+    auth.signInWithEmailAndPassword($scope.user.email, $scope.user.password)
+      .then(function(userCredential) {
+        $scope.$apply(function() {
+          $scope.loading = false;
+          var u = userCredential.user;
+          try {
+            localStorage.setItem('cp_loggedIn', 'true');
+            localStorage.setItem('cp_currentUser', JSON.stringify({
+              name : u.displayName || $scope.user.email.split('@')[0],
+              email: u.email,
+              uid  : u.uid
+            }));
+          } catch(e) {}
+          $scope.loggedInName = u.displayName || u.email.split('@')[0];
+          $scope.view = 'success';
+        });
+      })
+      .catch(function(error) {
+        $scope.$apply(function() {
+          $scope.loading = false;
+          if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential')
+            $scope.loginError = 'No account found or incorrect password.';
+          else if (error.code === 'auth/wrong-password')
+            $scope.loginError = 'Incorrect password. Please try again.';
+          else if (error.code === 'auth/too-many-requests')
+            $scope.loginError = 'Too many attempts. Please try again later.';
+          else
+            $scope.loginError = error.message;
+        });
+      });
+  };
+
+  // ── REGISTER — Firebase Auth ──
+  $scope.register = function() {
+    $scope.regError = '';
+    if (!$scope.reg.name || !$scope.reg.email || !$scope.reg.password || !$scope.reg.confirm) {
+      $scope.regError = 'Please fill in all fields.'; return;
+    }
+    if (!validEmail($scope.reg.email)) {
+      $scope.regError = 'Please enter a valid email address.'; return;
+    }
+    if ($scope.reg.password.length < 8) {
+      $scope.regError = 'Password must be at least 8 characters.'; return;
+    }
+    if ($scope.reg.password !== $scope.reg.confirm) {
+      $scope.regError = 'Passwords do not match.'; return;
+    }
+    if (!$scope.reg.terms) {
+      $scope.regError = 'Please accept the Terms & Privacy Policy.'; return;
+    }
+    $scope.loading = true;
+
+    auth.createUserWithEmailAndPassword($scope.reg.email, $scope.reg.password)
+      .then(function(userCredential) {
+        var u = userCredential.user;
+        return u.updateProfile({ displayName: $scope.reg.name })
+          .then(function() {
+            return db.collection('users').doc(u.uid).set({
+              name       : $scope.reg.name,
+              email      : $scope.reg.email,
+              createdAt  : firebase.firestore.FieldValue.serverTimestamp(),
+              streak     : 0,
+              dailyScore : 0,
+              totalXP    : 0
+            });
+          })
+          .then(function() {
+            $scope.$apply(function() {
+              $scope.loading = false;
+              try {
+                localStorage.setItem('cp_loggedIn', 'true');
+                localStorage.setItem('cp_currentUser', JSON.stringify({
+                  name : $scope.reg.name,
+                  email: $scope.reg.email,
+                  uid  : u.uid
+                }));
+              } catch(e) {}
+              $scope.loggedInName = $scope.reg.name.split(' ')[0];
+              $scope.view = 'success';
+            });
+          });
+      })
+      .catch(function(error) {
+        $scope.$apply(function() {
+          $scope.loading = false;
+          if (error.code === 'auth/email-already-in-use')
+            $scope.regError = 'An account with this email already exists.';
+          else
+            $scope.regError = error.message;
+        });
+      });
+  };
+
+  // ── FORGOT PASSWORD ──
+  $scope.sendReset = function() {
+    if (!$scope.forgot.email || !validEmail($scope.forgot.email)) return;
+    $scope.loading = true;
+    auth.sendPasswordResetEmail($scope.forgot.email)
+      .then(function() {
+        $scope.$apply(function() {
+          $scope.loading   = false;
+          $scope.resetSent = true;
+        });
+      })
+      .catch(function(err) {
+        $scope.$apply(function() {
+          $scope.loading    = false;
+          $scope.loginError = err.message;
+        });
+      });
+  };
+
+  // ── PASSWORD STRENGTH ──
+  $scope.passStrength = function() {
+    var p = $scope.reg.password || '';
+    var s = 0;
+    if (p.length >= 8)           s += 25;
+    if (p.length >= 12)          s += 15;
+    if (/[A-Z]/.test(p))         s += 20;
+    if (/[0-9]/.test(p))         s += 20;
+    if (/[^A-Za-z0-9]/.test(p))  s += 20;
+    return Math.min(s, 100);
+  };
+
+  $scope.passColor = function() {
+    var s = $scope.passStrength();
+    if (s < 40) return '#dc2626';
+    if (s < 70) return '#f59e0b';
+    return '#16a34a';
+  };
+
+  $scope.passLabel = function() {
+    var s = $scope.passStrength();
+    if (s < 40) return 'Weak — add more characters';
+    if (s < 70) return 'Medium — add symbols and uppercase';
+    return 'Strong password ✓';
+  };
+
+  // ── HELPER ──
+  function validEmail(e) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+  }
+
+}]);
+</script>
+</body>
+</html>
