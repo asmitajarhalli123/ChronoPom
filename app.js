@@ -1,5 +1,4 @@
 //App.CSS file
-// Initialize the app with ngRoute dependency
 var app = angular.module('myapp',['ngRoute']);
 
 // Configure routes
@@ -51,7 +50,7 @@ app.controller('MainController', ['$scope', '$location', function($scope, $locat
     return ($scope.currentUser.name || 'U').charAt(0).toUpperCase();
   };
 
-  // LOGOUT — defined on MainController scope
+  // LOGOUT 
   $scope.doLogout = function() {
     localStorage.removeItem('cp_loggedIn');
     localStorage.removeItem('cp_currentUser');
@@ -67,41 +66,7 @@ app.controller('myctrl' , function($scope , $interval , $timeout){
 
       var counterInterval = null;
 
-    //   //start the timer
-    //   $scope.start = function() {
-       
-    //     if (!counterInterval) {  // prevent multiple intervals
-    //       counterInterval = $interval(function() {
-    //         $scope.count++;
-    //       }, 1000); // 1000ms = 1 second
-    //     }
-    //   };
-
-      ///restart the timer
-    //   $scope.restart =function(){
-    //         $scope.count = 0;
-    //         if (counterInterval) {
-    //           $interval.cancel(counterInterval);
-    //           counterInterval = null;
-    //         }
-    //         $scope.start();
-    //   }
-
-
-    //   //go to next for break
-    //   $scope.next =function(){
-    //         $scope.count = 0;
-    //         if (counterInterval) {
-    //           $interval.cancel(counterInterval);
-    //           counterInterval = null;
-    //         }  
-    //   }
-        // $scope.progress = 0;
-        // $scope.tasklist = [];
-        // $scope.newTask = {};
-        // $scope.istask = false;
-
-        // function to set task
+// function to set task
         $scope.submittask = function(){
           $scope.taskCount = $scope.taskCount+1;
           if ($scope.newTask.taskname && $scope.newTask.taskname.trim() !== "") {
@@ -115,11 +80,6 @@ app.controller('myctrl' , function($scope , $interval , $timeout){
                   // Clear form after adding
                       $scope.newTask = {};
               };
-
-//timer Angular js
-// var app = angular.module("pomodoroApp", []);
-
-// app.controller("timerCtrl", function($scope,$interval){
 
 var timer = null;
 
@@ -343,14 +303,8 @@ const tl2 = gsap.timeline();
 
 
 
-
-
-
-//var app = angular.module("myApp", []);
-
-
     $timeout(function () {
-// asdasd
+
         // BAR CHART
         const barCtx = document.getElementById("barChart");
 
@@ -413,181 +367,6 @@ const tl2 = gsap.timeline();
 
 app.controller("MainController", function($scope, $timeout) {
 
-    
-    //   ACHIEVEMENTS SECTION
-    
-
-    // $scope.badges = [
-    //     {
-    //         name: "First Tomato",
-    //         desc: "Complete your first Pomodoro session",
-    //         level: "BRONZE",
-    //         icon: "🍅",
-    //         unlocked: true
-    //     },
-    //     {
-    //         name: "3-Day Warrior",
-    //         desc: "Maintain focus for 3 days",
-    //         level: "SILVER",
-    //         icon: "🔥",
-    //         unlocked: true
-    //     },
-    //     {
-    //         name: "Diamond Focus",
-    //         desc: "Complete 50 sessions",
-    //         level: "PLATINUM",
-    //         icon: "💎",
-    //         unlocked: false
-    //     }
-    // ];
-
-
-
-    // $scope.showPopup = false;
-    // $scope.selected = {};
-
-    // $scope.openPopup = function(badge) {
-    //     if (badge.unlocked) {
-    //         $scope.selected = badge;
-    //         $scope.showPopup = true;
-    //     }
-    // };
-
-    // $scope.closePopup = function() {
-    //     $scope.showPopup = false;
-    // };
-
-
-// ===== ACHIEVEMENT SYSTEM =====
-
-// $scope.stats = {
-//     sessions: 0,
-//     breaks: 0,
-//     early: 0,
-//     night: 0
-// };
-
-// $scope.badges = [
-//     {
-//         name: "🚀 Lift Off",
-//         desc: "Complete first session",
-//         unlocked: false,
-//         condition: () => $scope.stats.sessions >= 1
-//     },
-//     {
-//         name: "🔥 3 Day Streak",
-//         desc: "Complete 3 sessions",
-//         unlocked: false,
-//         condition: () => $scope.stats.sessions >= 3
-//     },
-//     {
-//         name: "⚡ Focus Master",
-//         desc: "Complete 5 sessions",
-//         unlocked: false,
-//         condition: () => $scope.stats.sessions >= 5
-//     },
-//     {
-//         name: "🌅 Early Bird",
-//         desc: "Work before 8AM",
-//         unlocked: false,
-//         condition: () => $scope.stats.early >= 1
-//     },
-//     {
-//         name: "🌙 Night Owl",
-//         desc: "Work after 11PM",
-//         unlocked: false,
-//         condition: () => $scope.stats.night >= 1
-//     },
-//     {
-//         name: "☕ Break Lover",
-//         desc: "Take 3 breaks",
-//         unlocked: false,
-//         condition: () => $scope.stats.breaks >= 3
-//     }
-// ];
-
-// $scope.showPopup = false;
-// $scope.selected = {};
-
-// function checkBadges() {
-//     $scope.badges.forEach(b => {
-//         if (!b.unlocked && b.condition()) {
-//             b.unlocked = true;
-
-//             $scope.selected = b;
-//             $scope.showPopup = true;
-
-//             setTimeout(() => {
-//                 $scope.showPopup = false;
-//                 $scope.$apply();
-//             }, 2000);
-//         }
-//     });
-// }
-
-// // CALL THIS WHEN TIMER FINISHES
-// $scope.completeSession = function () {
-//     $scope.stats.sessions++;
-
-//     let hour = new Date().getHours();
-//     if (hour < 8) $scope.stats.early++;
-//     if (hour >= 23) $scope.stats.night++;
-
-//     checkBadges();
-// };
-
-// // CALL THIS WHEN BREAK TAKEN
-// $scope.takeBreak = function () {
-//     $scope.stats.breaks++;
-//     checkBadges();
-// };
-
-// $scope.openPopup = function (badge) {
-//     if (badge.unlocked) {
-//         $scope.selected = badge;
-//         $scope.showPopup = true;
-//     }
-// };
-
-// $scope.closePopup = function () {
-//     $scope.showPopup = false;
-// };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // $scope.showPopup = false;
-    // $scope.selected = {};
-
-    // $scope.openPopup = function(badge) {
-    //     if (badge.unlocked) {
-    //         $scope.selected = badge;
-    //         $scope.showPopup = true;
-    //     }
-    // };
-
-    // $scope.closePopup = function() {
-    //     $scope.showPopup = false;
-    // };
-
 
 // ===== ACHIEVEMENT SYSTEM =====
 
@@ -684,42 +463,6 @@ $scope.closePopup = function () {
     $scope.showPopup = false;
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // $scope.showPopup = false;
-    // $scope.selected = {};
-
-    // $scope.openPopup = function(badge) {
-    //     if (badge.unlocked) {
-    //         $scope.selected = badge;
-    //         $scope.showPopup = true;
-    //     }
-    // };
-
-    // $scope.closePopup = function() {
-    //     $scope.showPopup = false;
-    // };
-
-
 // ===== ACHIEVEMENT SYSTEM =====
 
 $scope.stats = {
@@ -815,31 +558,7 @@ $scope.closePopup = function () {
     $scope.showPopup = false;
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
        //TASK SECTION
-    
 
     $scope.tasks = [];
 
@@ -877,20 +596,6 @@ $scope.closePopup = function () {
 
 });
 
-
-
-
-// add on code logic for timer and task interconncetion 
-
-
-// ============================================================
-//  ADD-ON CODE — paste at the bottom of your existing app.js
-//  Do NOT change anything already in your app.js
-// ============================================================
-
-
-// ── 1. SHARED SERVICE (single source of truth) ───────────────
-//    Stores timer state + tasks so they survive route changes.
 
 app.service('AppService', function () {
 
@@ -948,25 +653,20 @@ app.service('AppService', function () {
 });
 
 
-// ── 2. TIMER CONTROLLER (replaces myctrl for timer.html) ─────
-//    Reads/writes AppService so state never resets on navigation.
-
+// ── 2. TIMER CONTROLLER
 app.controller('TimerCtrl', ['$scope', '$interval', '$timeout', 'AppService',
 function ($scope, $interval, $timeout, AppService) {
 
-    // Expose service state directly on scope
     $scope.t     = AppService.timerState;
     $scope.tasks = AppService.tasks;
     $scope.stats = AppService.stats;
 
-    // Internal tick — advances timer every second
     function tick () {
         var t = AppService.timerState;
         if (t.timeLeft > 0) {
             t.timeLeft--;
             AppService.updateDisplay();
 
-            // Update active task's in-session progress bar
             var active = AppService.activeTask();
             if (active && t.mode === 'pomodoro') {
                 if (!active._secThisSession) active._secThisSession = 0;
@@ -1076,14 +776,11 @@ function ($scope, $interval, $timeout, AppService) {
         }
     }, 200);
 
-    // Don't cancel the interval when controller is destroyed —
-    // timer must keep running while user navigates to other pages
     $scope.$on('$destroy', function () { /* intentionally empty */ });
 }]);
 
 
-// ── 3. TASK CONTROLLER (replaces myctrl for tasks.html) ──────
-
+// ── 3. TASK CONTROLLER
 app.controller('TaskCtrl', ['$scope', '$timeout', 'AppService',
 function ($scope, $timeout, AppService) {
 

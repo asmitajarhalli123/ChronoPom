@@ -1,15 +1,4 @@
-// ============================================================
-//  ANALYTICS CONTROLLER
-//  Add this block inside your existing app.js file,
-//  alongside your other controllers.
-//
-//  It reads $scope.tasks (shared via $rootScope) and
-//  $scope.pomodoroLog (timer events) so every chart
-//  updates the moment a task or pomodoro changes.
-// ============================================================
 
-
-// ── Shared service so timer & tasks can broadcast to analytics ──
 app.factory('PomLog', function () {
     var log = [];           // { day:'Mon', category:'Work', focusMins:25 }
     var listeners = [];
@@ -25,30 +14,11 @@ app.factory('PomLog', function () {
 });
 
 
-// ── Patch myctrl to emit to PomLog when a pomodoro finishes ──
-//    Find your existing myctrl and add PomLog as dependency,
-//    then call PomLog.add() when the timer hits 0.
-//    (Snippet shown below — merge into your existing myctrl)
-//
-//  app.controller('myctrl', function($scope, $interval, $timeout, PomLog) {
-//    ...inside the $interval callback where you alert("Timer Finished!"):
-//      var activeTask = $scope.tasks && $scope.tasks.length
-//                       ? $scope.tasks[$scope.tasks.length - 1]
-//                       : null;
-//      PomLog.add({
-//          day      : ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date().getDay()],
-//          category : activeTask ? activeTask.category : 'Work',
-//          focusMins: Math.round($scope.totalTime / 60)
-//      });
-//    ...
-//  });
-
-
 // ── Main analytics controller ──
 app.controller('AnalyticsCtrl', ['$scope', '$rootScope', '$timeout', '$interval', 'PomLog',
 function ($scope, $rootScope, $timeout, $interval, PomLog) {
 
-    // ── PERIOD TABS ──────────────────────────────────────────
+    // ── PERIOD TABS 
     $scope.periods = [
         { key: 'week',  label: 'Week'     },
         { key: 'month', label: 'Month'    },
@@ -62,12 +32,12 @@ function ($scope, $rootScope, $timeout, $interval, PomLog) {
         updateLineChart();
     };
 
-    // ── COLOUR PALETTE ───────────────────────────────────────
+    // ── COLOUR PALETTE 
     var PALETTE = ['#8b5cf6','#06b6d4','#f59e0b','#10b981','#f43f5e','#3b82f6','#e879f9'];
 
     function color(i) { return PALETTE[i % PALETTE.length]; }
 
-    // ── METRIC CARDS ─────────────────────────────────────────
+    // ── METRIC CARDS
     $scope.metrics = [
         { label: 'Total pomodoros', icon: '🍅', value: '0',  up: true,  trend: '0%'  },
         { label: 'Focus time',      icon: '⏱',  value: '0m', up: true,  trend: '0%'  },
@@ -89,7 +59,7 @@ function ($scope, $rootScope, $timeout, $interval, PomLog) {
             : '0%';
     }
 
-    // ── TASK FILTER + HELPERS ────────────────────────────────
+    // ── TASK FILTER + HELPERS 
     $scope.taskFilter = 'All';
 
     $scope.filteredTasks = function () {
@@ -106,7 +76,7 @@ function ($scope, $rootScope, $timeout, $interval, PomLog) {
         return Math.min(100, Math.round((t.done || 0) / t.pomodoros * 100));
     };
 
-    // ── CATEGORY LEGEND (for donut) ──────────────────────────
+    // ── CATEGORY LEGEND (for donut) 
     $scope.categoryLegend = [];
 
     var CAT_COLORS = { Work: '#8b5cf6', Health: '#10b981', Creative: '#f59e0b', Other: '#06b6d4' };
@@ -122,7 +92,7 @@ function ($scope, $rootScope, $timeout, $interval, PomLog) {
         });
     }
 
-    // ── DAILY TICKS ──────────────────────────────────────────
+    // ── DAILY TICKS
     var DAY_KEYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 
     $scope.dailyTicks = DAY_KEYS.map(function (d) {
@@ -136,7 +106,7 @@ function ($scope, $rootScope, $timeout, $interval, PomLog) {
         updateBarChart();
     };
 
-    // ── HEATMAP ──────────────────────────────────────────────
+    // ── HEATMAP
     $scope.heatDays  = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
     $scope.heatHours = ['9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm'];
 
@@ -165,10 +135,10 @@ function ($scope, $rootScope, $timeout, $interval, PomLog) {
         $scope.$applyAsync(function () { refreshAll(); });
     });
 
-    // ── CHART REFERENCES ─────────────────────────────────────
+    // ── CHART REFERENCES 
     var barChart, donutChart, lineChart, scatterChart;
 
-    // ── BAR CHART: daily pomodoros vs tasks done ──────────────
+    // ── BAR CHART: daily pomodoros vs tasks done
     var barDatasets = {
         week:  { pom:[6,5,8,4,7,5,3],  tasks:[2,1,3,1,3,2,2]  },
         month: { pom:[28,34,30,38],     tasks:[9,11,10,14]       },
@@ -211,7 +181,7 @@ function ($scope, $rootScope, $timeout, $interval, PomLog) {
         barChart.update();
     }
 
-    // ── DONUT CHART: tasks by category ───────────────────────
+    // ── DONUT CHART: tasks by category
     function buildDonutData () {
         var tasks = $scope.tasks || [];
         var map   = {};
@@ -239,7 +209,7 @@ function ($scope, $rootScope, $timeout, $interval, PomLog) {
         buildCategoryLegend();
     }
 
-    // ── LINE CHART: weekly score trend ───────────────────────
+    // ── LINE CHART: weekly score trend 
     var lineDatasets = {
         week:  [650, 720, 880, 1050, 980, 1300],
         month: [2400, 2900, 2700, 3200],
@@ -263,7 +233,7 @@ function ($scope, $rootScope, $timeout, $interval, PomLog) {
         lineChart.update();
     }
 
-    // ── SCATTER CHART: focus time vs tasks completed ─────────
+    // ── SCATTER CHART: focus time vs tasks completed
     function buildScatterData () {
         var tasks = $scope.tasks || [];
         if (!tasks.length) {
@@ -286,7 +256,7 @@ function ($scope, $rootScope, $timeout, $interval, PomLog) {
         scatterChart.update();
     }
 
-    // ── INIT ALL CHARTS ──────────────────────────────────────
+    // ── INIT ALL CHARTS 
     var tipOpts = {
         backgroundColor: '#fff',
         titleColor: '#000c31',
@@ -413,8 +383,6 @@ function ($scope, $rootScope, $timeout, $interval, PomLog) {
         updateScatterChart();
     }
 
-    // ── WATCH $scope.tasks for any change ───────────────────
-    // tasks live on MainController scope; we reach them via $rootScope
     $scope.$watch(
         function () { return $rootScope.sharedTasks; },
         function (newVal) {
@@ -440,10 +408,4 @@ function ($scope, $rootScope, $timeout, $interval, PomLog) {
 }]);
 
 
-// ── PATCH MainController to share tasks via $rootScope ──────
-//    Add these two lines inside your existing MainController:
-//
-//   $scope.$watch('tasks', function(v){ $rootScope.sharedTasks = v; }, true);
-//
-//    And inject $rootScope:
-//   app.controller("MainController", function($scope, $timeout, $rootScope) { ... });
+// 

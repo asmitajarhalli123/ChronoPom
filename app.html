@@ -38,7 +38,7 @@
     })();
   </script>
 
-  <!-- ── Plain JS logout function — works independent of Angular scope ── -->
+  <!-- JS logout function  -->
   <script>
     function handleLogout() {
       try {
@@ -84,7 +84,7 @@
       white-space: nowrap;
     }
 
-    /* Logout button uses plain onclick — 100% reliable */
+    /* Logout button */
     .logout-btn {
       display: flex;
       align-items: center;
@@ -123,7 +123,6 @@
     <div class="right">
 
       <i class="fa-solid fa-clock"></i>
-      <!-- FIXED: removed ng-controller="myctrl" from here — it was causing scope conflict -->
       <a href="#!/timer"     ng-class="{'active': currentRoute=='/timer'}">TIMER</a>
       <i class="fa-solid fa-list-check"></i>
       <a href="#!/tasks"     ng-class="{'active': currentRoute=='/tasks'}">TASKS</a>
@@ -185,12 +184,6 @@
       <div class="nav-user">
         <div class="user-avatar">{{ userInitial() }}</div>
         <span class="user-name-text">{{ currentUser.name }}</span>
-
-        <!--
-          KEY FIX: using plain HTML onclick="handleLogout()"
-          instead of ng-click="logout()" so it NEVER gets blocked
-          by any Angular scope issue or child controller conflict
-        -->
         <button class="logout-btn" type="button" onclick="handleLogout()">
           <i class="fa-solid fa-right-from-bracket"></i> Logout
         </button>

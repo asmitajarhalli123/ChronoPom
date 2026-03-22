@@ -1,26 +1,7 @@
-// ============================================================
-//  CHRONOPOM — addon_connect.js
-//  DROP-IN CONNECTION FILE
-//  Paste this entire file at the BOTTOM of your app.js,
-//  after all your existing code.
-//
-//  What it does:
-//    1. Upgrades AppService to track pomodoro logs & stats
-//    2. Rewires AnalyticsCtrl to read directly from AppService
-//       (no more $rootScope dependency)
-//    3. Patches TimerCtrl's tick() to emit into PomLog +
-//       update heatmap, streak and daily score
-//    4. Patches TaskCtrl to fire analytics refresh on every
-//       task add / delete / completion toggle
-// ============================================================
-
-
 // ── 1. EXTEND AppService with analytics data ─────────────────
-//    We decorate the existing service rather than redefine it.
 
 app.run(['AppService', function (AppService) {
 
-    // Pomodoro log — each entry: { day, hour, category, focusMins }
     if (!AppService.pomLog)       AppService.pomLog       = [];
     if (!AppService._anListeners) AppService._anListeners = [];
 
@@ -33,7 +14,6 @@ app.run(['AppService', function (AppService) {
         ];
     }
 
-    // Pub/sub so AnalyticsCtrl can react to pomodoro completion
     AppService.logPomodoro = function (entry) {
         AppService.pomLog.push(entry);
         AppService._anListeners.forEach(function (fn) { fn(); });
@@ -43,7 +23,7 @@ app.run(['AppService', function (AppService) {
         AppService._anListeners.push(fn);
     };
 
-    // streak: simple daily tracking using localStorage
+
     AppService.refreshStreak = function () {
         var today     = new Date().toDateString();
         var last      = localStorage.getItem('cp_lastDay')  || '';
@@ -68,18 +48,7 @@ app.run(['AppService', function (AppService) {
 }]);
 
 
-// ── 2. PATCH TimerCtrl — emit PomLog on session complete ─────
-//    We override the controller's completeSession logic by
-//    decorating $provide. Since AngularJS doesn't natively
-//    support controller decoration, we instead monkey-patch
-//    the tick via an app.run block that replaces the stored
-//    interval function when TimerCtrl registers it.
-//
-//    Simpler approach: we hook into AppService._timerInterval
-//    by wrapping AppService.logPomodoro inside TimerCtrl itself.
-//    The cleanest way: re-declare TimerCtrl with the extra deps.
-//    AngularJS allows multiple .controller() calls; the last one wins.
-
+// ── 2. PATCH TimerCtrl —
 app.controller('TimerCtrl', ['$scope', '$interval', '$timeout', 'AppService',
 function ($scope, $interval, $timeout, AppService) {
 
@@ -229,8 +198,6 @@ function ($scope, $interval, $timeout, AppService) {
 
 
 // ── 3. PATCH TaskCtrl — trigger analytics refresh on changes ──
-//    Re-declare TaskCtrl so it also notifies AppService listeners
-//    whenever tasks are mutated.
 
 app.controller('TaskCtrl', ['$scope', '$timeout', 'AppService',
 function ($scope, $timeout, AppService) {
@@ -300,8 +267,6 @@ function ($scope, $timeout, AppService) {
 
 
 // ── 4. REWRITE AnalyticsCtrl — reads directly from AppService ─
-//    Drops the $rootScope.sharedTasks approach entirely.
-
 app.controller('AnalyticsCtrl', ['$scope', '$timeout', '$interval', 'AppService',
 function ($scope, $timeout, $interval, AppService) {
 

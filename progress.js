@@ -1,11 +1,4 @@
-// ============================================================
-//  progress_addon.js
-//  Paste this at the BOTTOM of your existing app.js
-//  Also add in app.html <head>:
-//    <link rel="stylesheet" href="progress.css">
-//  And before </body>:
-//    <script src="progress_addon.js"></script>
-// ============================================================
+
 
 app.controller('ProgressCtrl', ['$scope', '$timeout', '$interval', 'AppService',
 function ($scope, $timeout, $interval, AppService) {
