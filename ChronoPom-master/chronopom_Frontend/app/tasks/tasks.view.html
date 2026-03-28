@@ -1,0 +1,98 @@
+<!-- app/tasks/tasks.view.html -->
+<div class="taskcontainer" ng-controller="TaskCtrl">
+  <div class="app">
+
+    <div class="head">
+      <h1 class="ttl">Task Manager</h1>
+      <p class="sub">Turn Plans into Progress.</p>
+    </div>
+
+    <!-- ADD TASK FORM -->
+    <div class="main-container">
+      <div class="add-box">
+        <h2>Add New Task</h2>
+        <div class="row">
+          <input type="text"   ng-model="task.name"     placeholder="What needs to be done?" class="task-input"
+                               ng-keydown="$event.key === 'Enter' && addTask()">
+          <input type="number" ng-model="task.pomodoros" class="small-input" min="1" max="20" placeholder="🍅">
+        </div>
+        <div class="row">
+          <select ng-model="task.priority">
+            <option value="High">High priority</option>
+            <option value="Medium">Medium priority</option>
+          </select>
+          <select ng-model="task.category">
+            <option value="Work">Work</option>
+            <option value="Health">Health</option>
+            <option value="Creative">Creative</option>
+          </select>
+          <button class="add-btn" ng-click="addTask()">Add Task →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK GRID -->
+    <div class="task-grid" ng-if="tasks.length > 0">
+      <div class="task-card"
+           ng-repeat="(i, t) in tasks"
+           ng-class="{
+             'task-card-active'    : isActive(i),
+             'task-card-completed' : t.completed
+           }">
+
+        <div class="card-header">
+          <h3>{{ t.name }}</h3>
+          <span class="badge"
+                ng-class="{ high: t.priority === 'High', medium: t.priority === 'Medium' }">
+            {{ t.priority }}
+          </span>
+        </div>
+
+        <p class="category">{{ t.category }} · {{ t.pomodoros }} pomodoros estimated</p>
+
+        <div class="pom-dots">
+          <span class="pom-dot"
+                ng-repeat="p in pomodoroArray(t)"
+                ng-class="p.filled ? 'pom-dot-filled' : 'pom-dot-empty'">🍅</span>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-fill" ng-style="{ width: barWidth(t) + '%' }"></div>
+        </div>
+        <p class="progress-label">{{ t.done }} / {{ t.pomodoros }} done ({{ barWidth(t) }}%)</p>
+
+        <div class="active-badge" ng-if="isActive(i)">
+          <i class="fa-solid fa-clock-rotate-left"></i> Running in timer
+        </div>
+
+        <div class="card-footer">
+          <div class="complete-box">
+            <input type="checkbox" ng-model="t.completed"> Completed
+          </div>
+          <div class="card-actions">
+            <button class="btn-focus"
+                    ng-if="!t.completed"
+                    ng-click="setActive(i)"
+                    title="Focus timer on this task">
+              {{ isActive(i) ? '⏱ Active' : '▶ Focus' }}
+            </button>
+            <button class="btn-delete" ng-click="deleteTask(i)" title="Delete task">✕</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Empty state -->
+    <div class="tasks-empty" ng-if="tasks.length === 0">
+      <p>No tasks yet.</p>
+      <p>Add one above and hit <strong>▶ Focus</strong> to link it with the timer.</p>
+    </div>
+
+    <!-- Notification toast -->
+    <div class="notification" ng-show="showNotification">
+      {{ notificationMsg }}
+    </div>
+
+  </div>
+</div>

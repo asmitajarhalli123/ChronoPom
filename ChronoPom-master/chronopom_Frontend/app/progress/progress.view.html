@@ -1,0 +1,120 @@
+<!-- app/progress/progress.view.html -->
+<div class="pr-page" ng-controller="ProgressCtrl">
+
+  <!-- Toast -->
+  <div class="pr-toast" ng-class="{'pr-toast-show': toast.visible}">
+    <span class="pr-toast-icon">{{ toast.icon }}</span>
+    <div class="pr-toast-body">
+      <strong>Badge Unlocked!</strong>
+      <span>{{ toast.name }}</span>
+    </div>
+    <span class="pr-toast-xp">+{{ toast.xp }} XP</span>
+  </div>
+
+  <!-- Header -->
+  <div class="pr-header">
+    <div>
+      <h1 class="pr-title">Progress</h1>
+      <p class="pr-sub">Your achievements and badges</p>
+    </div>
+    <div class="pr-level-box">
+      <div class="pr-level-circle">{{ currentLevel() }}</div>
+      <div class="pr-level-info">
+        <div class="pr-level-name">{{ levelTitle() }}</div>
+        <div class="pr-xp-text">{{ totalXP() }} / {{ nextLevelXP() }} XP</div>
+        <div class="pr-xp-bar">
+          <div class="pr-xp-fill" ng-style="{width: xpPercent()+'%'}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats row -->
+  <div class="pr-stats">
+    <div class="pr-stat" ng-repeat="s in miniStats">
+      <div class="pr-stat-val">{{ s.value }}</div>
+      <div class="pr-stat-lbl">{{ s.icon }} {{ s.label }}</div>
+    </div>
+  </div>
+
+  <!-- Section title -->
+  <div class="pr-section-title">
+    <span>Badges</span>
+    <span class="pr-count">{{ unlockedCount() }} / {{ badges.length }} earned</span>
+  </div>
+
+  <!-- Filter tabs -->
+  <div class="pr-tabs">
+    <button class="pr-tab"
+            ng-repeat="f in filters"
+            ng-class="{'pr-tab-active': badgeFilter === f.key}"
+            ng-click="badgeFilter = f.key">{{ f.label }}</button>
+  </div>
+
+  <!-- Badge grid -->
+  <div class="pr-grid">
+    <div class="pr-badge-card"
+         ng-repeat="b in badges | filter: filterFn"
+         ng-class="{'pr-unlocked': b.unlocked, 'pr-locked-card': !b.unlocked}"
+         ng-click="openModal(b)">
+      <span class="pr-lock-icon" ng-if="!b.unlocked">🔒</span>
+      <div class="pr-strip pr-strip-{{b.rarity|lowercase}}"></div>
+      <div class="pr-badge-emoji">{{ b.icon }}</div>
+      <div class="pr-badge-name">{{ b.name }}</div>
+      <div class="pr-badge-req">{{ b.requirement }}</div>
+      <div class="pr-prog-wrap" ng-if="!b.unlocked && b.showProgress">
+        <div class="pr-prog-bar">
+          <div class="pr-prog-fill" ng-style="{width: badgePct(b)+'%'}"></div>
+        </div>
+        <span class="pr-prog-txt">{{ badgePct(b) }}%</span>
+      </div>
+      <div class="pr-badge-xp" ng-class="b.unlocked ? 'xp-on':'xp-off'">+{{ b.xp }} XP</div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="pr-backdrop" ng-if="modal.open" ng-click="closeModal()">
+    <div class="pr-modal" ng-click="$event.stopPropagation()">
+      <button class="pr-modal-close" ng-click="closeModal()">✕</button>
+      <div class="pr-modal-emoji">{{ modal.badge.icon }}</div>
+      <div class="pr-modal-rarity pr-strip-{{modal.badge.rarity|lowercase}}-txt">{{ modal.badge.rarity }}</div>
+      <div class="pr-modal-name">{{ modal.badge.name }}</div>
+      <p class="pr-modal-desc">{{ modal.badge.desc }}</p>
+      <div class="pr-modal-line">
+        <span class="pr-modal-lbl">Requirement</span>
+        <span class="pr-modal-val">{{ modal.badge.requirement }}</span>
+      </div>
+      <div class="pr-modal-prog" ng-if="!modal.badge.unlocked && modal.badge.showProgress">
+        <div class="pr-prog-bar" style="height:6px">
+          <div class="pr-prog-fill" ng-style="{width: badgePct(modal.badge)+'%'}"></div>
+        </div>
+        <span class="pr-prog-txt">{{ badgePct(modal.badge) }}% complete</span>
+      </div>
+      <div class="pr-modal-line">
+        <span class="pr-modal-lbl">XP Reward</span>
+        <span ng-class="modal.badge.unlocked ? 'xp-on':'xp-off'">+{{ modal.badge.xp }} XP</span>
+      </div>
+      <div class="pr-modal-status" ng-class="modal.badge.unlocked ? 'status-on':'status-off'">
+        {{ modal.badge.unlocked ? '✅ Unlocked' : '🔒 Keep going!' }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Awards -->
+  <div class="pr-section-title" style="margin-top:40px">
+    <span>Productivity Awards</span>
+  </div>
+  <div class="pr-awards">
+    <div class="pr-award"
+         ng-repeat="a in awards"
+         ng-class="a.earned ? 'pr-award-on':'pr-award-off'">
+      <div class="pr-award-icon">{{ a.icon }}</div>
+      <div class="pr-award-name">{{ a.name }}</div>
+      <div class="pr-award-desc">{{ a.desc }}</div>
+      <div class="pr-award-tag" ng-class="a.earned ? 'tag-on':'tag-off'">
+        {{ a.earned ? 'EARNED' : 'LOCKED' }}
+      </div>
+    </div>
+  </div>
+
+</div>
