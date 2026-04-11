@@ -232,11 +232,6 @@ a.submit-btn{display:block;text-align:center;text-decoration:none;margin-top:20p
           </div>
         </div>
 
-        <div class="terms-row">
-          <input type="checkbox" ng-model="reg.terms">
-          <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
-        </div>
-
         <div class="error-msg" ng-show="regError">
           <i class="fa-solid fa-circle-exclamation"></i> {{ regError }}
         </div>
@@ -261,8 +256,11 @@ a.submit-btn{display:block;text-align:center;text-decoration:none;margin-top:20p
             <input type="email" ng-model="forgot.email" placeholder="you@example.com">
           </div>
         </div>
+        <div class="error-msg" ng-show="forgotError">
+          <i class="fa-solid fa-circle-exclamation"></i> {{ forgotError }}
+        </div>
         <div class="success-msg" ng-show="resetSent">
-          <i class="fa-solid fa-check-circle"></i> Reset link sent! Check your inbox.
+          <i class="fa-solid fa-check-circle"></i> Reset link sent! Check your inbox (and spam folder).
         </div>
         <button class="submit-btn" type="button" ng-click="sendReset()" ng-disabled="loading">
           <span ng-hide="loading">Send Reset Link &nbsp;<i class="fa-solid fa-paper-plane"></i></span>
@@ -295,6 +293,7 @@ authApp.controller('AuthCtrl', ['$scope', '$timeout', function($scope, $timeout)
   $scope.showPass     = false;
   $scope.showRegPass  = false;
   $scope.loggedInName = '';
+  $scope.forgotError  = '';
 
   $scope.user   = { email: '', password: '', remember: false };
   $scope.reg    = { name: '', email: '', password: '', confirm: '', terms: false };
@@ -325,10 +324,11 @@ authApp.controller('AuthCtrl', ['$scope', '$timeout', function($scope, $timeout)
   };
 
   $scope.switchView = function(v) {
-    $scope.loginError = '';
-    $scope.regError   = '';
-    $scope.resetSent  = false;
-    $scope.loading    = false;
+    $scope.loginError  = '';
+    $scope.regError    = '';
+    $scope.forgotError = '';
+    $scope.resetSent   = false;
+    $scope.loading     = false;
     $scope.view = v;
   };
 
@@ -390,9 +390,6 @@ authApp.controller('AuthCtrl', ['$scope', '$timeout', function($scope, $timeout)
     if ($scope.reg.password !== $scope.reg.confirm) {
       $scope.regError = 'Passwords do not match.'; return;
     }
-    if (!$scope.reg.terms) {
-      $scope.regError = 'Please accept the Terms & Privacy Policy.'; return;
-    }
     $scope.loading = true;
 
     auth.createUserWithEmailAndPassword($scope.reg.email, $scope.reg.password)
@@ -438,19 +435,33 @@ authApp.controller('AuthCtrl', ['$scope', '$timeout', function($scope, $timeout)
 
   // ── FORGOT PASSWORD ──
   $scope.sendReset = function() {
-    if (!$scope.forgot.email || !validEmail($scope.forgot.email)) return;
+    $scope.forgotError = '';
+    $scope.resetSent   = false;
+    if (!$scope.forgot.email) {
+      $scope.forgotError = 'Please enter your email address.'; return;
+    }
+    if (!validEmail($scope.forgot.email)) {
+      $scope.forgotError = 'Please enter a valid email address.'; return;
+    }
     $scope.loading = true;
     auth.sendPasswordResetEmail($scope.forgot.email)
       .then(function() {
-        $scope.$apply(function() {
+        $timeout(function() {
           $scope.loading   = false;
           $scope.resetSent = true;
         });
       })
       .catch(function(err) {
-        $scope.$apply(function() {
-          $scope.loading    = false;
-          $scope.loginError = err.message;
+        $timeout(function() {
+          $scope.loading = false;
+          if (err.code === 'auth/user-not-found' || err.code === 'auth/invalid-credential')
+            $scope.forgotError = 'No account found with this email. Please register first.';
+          else if (err.code === 'auth/invalid-email')
+            $scope.forgotError = 'Please enter a valid email address.';
+          else if (err.code === 'auth/too-many-requests')
+            $scope.forgotError = 'Too many attempts. Please wait a few minutes and try again.';
+          else
+            $scope.forgotError = 'Something went wrong: ' + err.message;
         });
       });
   };

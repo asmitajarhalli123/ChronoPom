@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@splinetool/react-spline": "^4.1.0",
     "angular": "^1.8.3",
     "angularjs": "^0.0.1",
     "js": "^0.1.0"

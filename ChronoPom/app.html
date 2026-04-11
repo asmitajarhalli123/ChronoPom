@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" ng-app="myapp">
 <head>
@@ -111,41 +112,6 @@
       <i class="fa-solid fa-bars-progress"></i>
       <a href="#!/progress"  ng-class="{'active': currentRoute=='/progress'}">PROGRESS</a>
 
-      <!-- Theme Picker -->
-      <div class="colorbox">
-        <div class="color" ng-click="changeColor()"><i class="fa-solid fa-palette"></i></div>
-        <div class="cont" ng-show="color">
-          <h2 class="themetitle">Select Your Theme</h2>
-          <div class="theme-card" ng-click="unshow()" ng-class="{'active': currentTheme=='Neon Focus'}">
-            <div class="theme-info">
-              <h3>Neon Focus</h3><p>Dark background with glowing accents</p>
-              <div class="colors">
-                <span style="background:#0b1020"></span><span style="background:#e6f0ff"></span>
-                <span style="background:#00d4ff"></span><span style="background:#060b1a"></span><span style="background:#ff007a"></span>
-              </div>
-            </div>
-          </div>
-          <div class="theme-card active" ng-click="unshow()" ng-class="{'active': currentTheme=='Soft Pastel Calm'}">
-            <div class="theme-info">
-              <h3>Soft Pastel Calm</h3><p>Light colors with rounded elements</p>
-              <div class="colors">
-                <span style="background:#f8f5f0"></span><span style="background:#5a5148"></span>
-                <span style="background:#b8b2e6"></span><span style="background:#ffffff"></span><span style="background:#a8dadc"></span>
-              </div>
-            </div>
-          </div>
-          <div class="theme-card" ng-class="{'active': currentTheme=='Glassmorphism'}" ng-click="unshow()">
-            <div class="theme-info">
-              <h3>Glassmorphism</h3><p>Blurred transparent cards</p>
-              <div class="colors">
-                <span style="background:#0f172a"></span><span style="background:#e5e7eb"></span>
-                <span style="background:#4f6df5"></span><span style="background:#f1f5f9"></span><span style="background:#7c5cff"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- User + Logout -->
       <div class="nav-user">
         <div class="user-avatar">{{ userInitial() }}</div>
@@ -164,5 +130,8 @@
   <script src="js/anConncetion.js"></script>
   <script src="js/progress.js"></script>
 
+
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@latest/build/spline-viewer.js"></script>
+  
 </body>
 </html>
