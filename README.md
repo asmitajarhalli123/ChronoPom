@@ -105,16 +105,23 @@ Whether you're a **student** grinding through exams or a **professional** shippi
 
 <div align="center">
 
-<img src="https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif" width="100%" alt="App Preview"/>
+<img width="1600" height="774" alt="image" src="https://github.com/user-attachments/assets/140b63e5-dd13-4591-89a2-d49ac8f0b84a" />
+<img width="1600" height="764" alt="image" src="https://github.com/user-attachments/assets/97ee296b-7b8f-467d-9ff3-123571611f57" />
+<img width="1600" height="768" alt="image" src="https://github.com/user-attachments/assets/307efd6e-56a2-431f-a903-d39f1b0dbc00" />
+<img width="1600" height="763" alt="image" src="https://github.com/user-attachments/assets/20704ebc-fae0-4876-8cb3-c70741b9d3ae" />
+<img width="1600" height="759" alt="image" src="https://github.com/user-attachments/assets/22a5add3-48ad-4671-98af-abc2a4c5f151" />
+<img width="1600" height="763" alt="image" src="https://github.com/user-attachments/assets/2a21c185-17ac-4fa3-9160-e4bc8a143cc9" />
+<img width="1600" height="766" alt="image" src="https://github.com/user-attachments/assets/c1817acc-2ebe-4f1e-9983-95093ab67009" />
+<img width="1600" height="765" alt="image" src="https://github.com/user-attachments/assets/1a9025b1-89f4-4ee1-a06d-35cbb3100473" />
+<img width="1600" height="758" alt="image" src="https://github.com/user-attachments/assets/ff7ade88-99b7-4dea-ac78-5a24efa7ee38" />
+<img width="1600" height="759" alt="image" src="https://github.com/user-attachments/assets/10de57ce-b87d-4843-a633-bba242017aff" />
+<img width="1600" height="757" alt="image" src="https://github.com/user-attachments/assets/264e08d7-382c-489b-9509-65aecd1bd2aa" />
+<img width="1600" height="768" alt="image" src="https://github.com/user-attachments/assets/3b03283b-ffb1-4ece-8a32-bfb65b603c8e" />
+<img width="1600" height="763" alt="image" src="https://github.com/user-attachments/assets/c0459dc7-0940-4984-b32c-9a5dc99b6d5a" />
+<img width="1902" height="867" alt="image" src="https://github.com/user-attachments/assets/f7019f78-0577-439d-9591-f72caf8eb72c" />
 
-> 📸 *Replace with a real screen recording using [ScreenToGif](https://www.screentogif.com/) or [Loom](https://loom.com)*
 
-<br/>
 
-| 🕐 Timer Dashboard | ✅ Task Manager | 📊 Analytics |
-|:---:|:---:|:---:|
-| <img src="https://via.placeholder.com/300x200/0D1117/48B3AF?text=⏱️+TIMER+VIEW" width="300"/> | <img src="https://via.placeholder.com/300x200/0D1117/A7E399?text=✅+TASK+VIEW" width="300"/> | <img src="https://via.placeholder.com/300x200/0D1117/FF6B6B?text=📊+ANALYTICS" width="300"/> |
-| Pomodoro sessions + Live stats | Add, track & complete tasks | Daily productivity charts |
 
 </div>
 
