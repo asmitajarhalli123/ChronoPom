@@ -1,3 +1,4 @@
+ <!-- tasks.html — uses TaskCtrl (tasks live in AppService, shared with timer) -->
 <div class="taskcontainer" ng-controller="TaskCtrl">
 
   <div class="app">
@@ -45,7 +46,7 @@
              'task-card-completed' : t.completed
            }">
 
-        <!-- header -->
+        <!-- priority section-->
         <div class="card-header">
           <h3>{{ t.name }}</h3>
           <span class="badge"
@@ -80,19 +81,17 @@
         <!-- footer controls -->
         <div class="card-footer">
           <div class="complete-box">
-            <input type="checkbox" ng-model="t.completed"> Completed
+            <!-- ng-change="markDirty(t)" triggers the Firestore save -->
+            <input type="checkbox" ng-model="t.completed" ng-change="markDirty(t)"> Completed
           </div>
 
           <div class="card-actions">
-            <!-- set as active task in timer -->
             <button class="btn-focus"
                     ng-if="!t.completed"
                     ng-click="setActive(i)"
                     title="Focus timer on this task">
               {{ isActive(i) ? '⏱ Active' : '▶ Focus' }}
             </button>
-
-            <!-- delete -->
             <button class="btn-delete" ng-click="deleteTask(i)" title="Delete task">✕</button>
           </div>
         </div>
