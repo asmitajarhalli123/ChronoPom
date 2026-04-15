@@ -67,6 +67,8 @@ app.controller('myctrl' , function($scope , $interval , $timeout){
       var counterInterval = null;
 
 // function to set task
+
+
         $scope.submittask = function(){
           $scope.taskCount = $scope.taskCount+1;
           if ($scope.newTask.taskname && $scope.newTask.taskname.trim() !== "") {
@@ -663,11 +665,16 @@ function ($scope, $interval, $timeout, AppService) {
 
     function tick () {
         var t = AppService.timerState;
+
+        // Timer Decrease Logic
         if (t.timeLeft > 0) {
             t.timeLeft--;
             AppService.updateDisplay();
 
+            // track the Timer PRogress
+
             var active = AppService.activeTask();
+
             if (active && t.mode === 'pomodoro') {
                 if (!active._secThisSession) active._secThisSession = 0;
                 active._secThisSession++;

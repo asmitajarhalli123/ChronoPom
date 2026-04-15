@@ -1,5 +1,7 @@
  <!-- tasks.html — uses TaskCtrl (tasks live in AppService, shared with timer) -->
-<div class="taskcontainer" ng-controller="TaskCtrl">
+<!-- App.Html File -->
+
+ <div class="taskcontainer" ng-controller="TaskCtrl">
 
   <div class="app">
 
@@ -23,6 +25,7 @@
           <select ng-model="task.priority">
             <option value="High">High priority</option>
             <option value="Medium">Medium priority</option>
+            <option value="Low"></option>
           </select>
 
           <select ng-model="task.category">
@@ -54,8 +57,9 @@
             {{ t.priority }}
           </span>
         </div>
+        
 <!-- Priority section completed -->
-        <!-- meta -->
+       
         <p class="category">{{ t.category }} · {{ t.pomodoros }} pomodoros estimated</p>
 
         <!-- pomodoro dots -->
